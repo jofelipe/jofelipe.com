@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components';
 
+interface IHeader {
+  isFixed: boolean;
+}
+
 interface IMenu {
   isOpen: boolean;
 }
 
-export const Wrapper = styled.header`
+export const Wrapper = styled.header<IHeader>`
   background: ${props => props.theme.colors.background};
   display: flex;
   align-items: center;
@@ -22,6 +26,10 @@ export const Wrapper = styled.header`
     font-weight: 900;
     text-transform: uppercase;
   }
+
+  ${props => props.isFixed && css`
+    position: static;
+  `}
 
   @media (max-width: 1400px) {
     padding: 48px 64px;

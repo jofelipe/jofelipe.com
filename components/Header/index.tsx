@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import Link from 'next/link';
 
 import { Wrapper, Menu, MobileMenu } from './styles';
 
-const Header = () => {
+interface IHeader {
+  isFixed: boolean;
+}
+
+const Header: FC<IHeader> = ({ isFixed }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <Wrapper>
+    <Wrapper isFixed={isFixed}>
       <Link href="/">
         <a className="logo">Jonathan Felipe</a>
       </Link>

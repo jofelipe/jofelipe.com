@@ -31,9 +31,18 @@ export const Wrapper = styled.main`
   flex-direction: row;
   min-height: 100%;
   align-items: stretch;
+  padding-top: 155px;
+
+  @media (max-width: 1400px) {
+    padding-top: 124px;
+  }
 
   @media (max-width: 960px) {
     flex-direction: column;
+  }
+
+  @media (max-width: 767px) {
+    padding-top: 16px;
   }
 `;
 
@@ -305,6 +314,13 @@ export const Project = styled.article`
 
     svg {
       margin-right: 8px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    span {
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 `;
