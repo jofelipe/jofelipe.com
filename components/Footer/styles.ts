@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.footer`
-  margin-bottom: 48px;
+  padding-bottom: 48px;
   text-align: center;
 
   p {
@@ -9,10 +9,10 @@ export const Wrapper = styled.footer`
     font-size: 14px;
     font-weight: 300;
     line-height: 24px;
-    margin-bottom: 0;
+    margin: 0;
   }
 
   @media (max-width: 767px) {
-    padding: 0 24px;
+    padding: 0 32px 32px;
   }
 `;

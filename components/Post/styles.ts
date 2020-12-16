@@ -31,6 +31,10 @@ export const Wrapper = styled.article`
     line-height: 32px;
     font-weight: 400;
     margin: 24px 0;
+
+    svg {
+      vertical-align: middle !important;
+    }
   }
 
   span {

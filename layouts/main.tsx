@@ -8,17 +8,17 @@ import 'normalize.css';
 import GlobalStyle from 'styles/global';
 
 interface ILayout {
-  headerFixed?: boolean;
+  headerStatic?: boolean;
 }
 
-const Main: FC<ILayout> = ({ headerFixed, children }) => {
+const Main: FC<ILayout> = ({ headerStatic, children }) => {
   return (
     <>
       <GlobalStyle />
 
       <GoogleFonts href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" />
 
-      <Header isFixed={headerFixed} />
+      <Header isStatic={headerStatic} />
 
       <main>
         {children}

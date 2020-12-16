@@ -31,5 +31,9 @@ export const Wrapper = styled.section`
       font-size: 32px;
       margin-bottom: 32px;
     }
+
+    .mansory {
+      margin-bottom: 48px;
+    }
   }
 `;

@@ -4,22 +4,22 @@ import Link from 'next/link';
 import { Wrapper, Menu, MobileMenu } from './styles';
 
 interface IHeader {
-  isFixed: boolean;
+  isStatic: boolean;
 }
 
-const Header: FC<IHeader> = ({ isFixed }) => {
+const Header: FC<IHeader> = ({ isStatic }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <Wrapper isFixed={isFixed}>
+    <Wrapper isStatic={isStatic}>
       <Link href="/">
         <a className="logo">Jonathan Felipe</a>
       </Link>
 
       <Menu isOpen={openMenu}>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><Link href="/"><a>Home</a></Link></li>
+          <li><Link href="/blog"><a>Blog</a></Link></li>
           <li><a href="#">Projetos</a></li>
           <li><a href="#">Agora</a></li>
         </ul>

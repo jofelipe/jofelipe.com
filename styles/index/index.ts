@@ -60,6 +60,18 @@ export const TextHome = styled.article`
     line-height: 30px;
     margin: 0 0 32px;
 
+    a {
+      color: #fff;
+      border-bottom: 1px dotted #fff;
+      padding-bottom: 2px;
+      transition: all .1s linear;
+
+      &:hover {
+        border-bottom-color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.primary};
+      }
+    }
+
     &:last-of-type {
       margin-bottom: 24px;
     }
@@ -160,16 +172,17 @@ export const PhotoSocial = styled.div`
   width: 552px;
   ${marginBottomHome};
 
-  .photo {
+  div:nth-child(2) {
     margin: 81px 0 0 auto;
   }
 
   @media (max-width: 1400px) {
     width: 460px;
 
-    .photo {
+    div:nth-child(2) {
       margin-top: 161px;
-      width: 184px;
+      width: 184px !important;
+      height: 184px !important;
     }
   }
 
@@ -177,9 +190,9 @@ export const PhotoSocial = styled.div`
     width: 368px;
     position: relative;
 
-    .photo {
+    div:nth-child(2) {
       margin-top: 81px;
-      position: absolute;
+      position: absolute !important;
       top: 0;
       right: 0;
     }
@@ -193,7 +206,7 @@ export const PhotoSocial = styled.div`
     width: auto;
     margin: 0 -32px 64px;
 
-    .photo {
+    div:nth-child(2) {
       right: auto;
       left: 184px;
     }

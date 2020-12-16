@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface IHeader {
-  isFixed: boolean;
+  isStatic: boolean;
 }
 
 interface IMenu {
@@ -27,7 +27,7 @@ export const Wrapper = styled.header<IHeader>`
     text-transform: uppercase;
   }
 
-  ${props => props.isFixed && css`
+  ${props => props.isStatic && css`
     position: static;
   `}
 
