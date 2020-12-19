@@ -4,8 +4,9 @@ import path from 'path';
 import matter from 'gray-matter';
 
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { NextSeo } from 'next-seo';
-import { format } from 'date-fns';
+import { IFrontMatterPost } from 'types';
+import { NextSeo, ArticleJsonLd } from 'next-seo';
+import { format, formatISO } from 'date-fns';
 
 import Layout from 'layouts/main';
 
@@ -14,12 +15,49 @@ import Footer from 'components/Footer';
 
 import { CalendarIcon, ClockIcon } from '@primer/octicons-react';
 
-import { Wrapper, Content, PostInfo, FeaturedImage, Comments } from 'styles/blog/post';
+import {
+  Wrapper,
+  Content,
+  PostInfo,
+  FeaturedImage,
+  Comments,
+} from 'styles/blog/post';
 
-const Post = ({ content, frontmatter }) => {
+const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
   return (
     <>
-      <NextSeo title={frontmatter.title} />
+      <NextSeo
+        title={frontmatter.title}
+        openGraph={{
+          title: frontmatter.title,
+          description: frontmatter.description,
+          url: `${process.env.NEXT_PUBLIC_URL}/post/${slug}`,
+          type: 'article',
+          article: {
+            publishedTime: frontmatter.dateISO,
+            authors: [`${process.env.NEXT_PUBLIC_URL}/`],
+          },
+          images: [
+            {
+              url: `${process.env.NEXT_PUBLIC_URL}${frontmatter.openGraphImage}`,
+              width: 1200,
+              height: 1200,
+              alt: frontmatter.title,
+            },
+          ],
+        }}
+      />
+
+      <ArticleJsonLd
+        url={`${process.env.NEXT_PUBLIC_URL}/post/${slug}`}
+        title={frontmatter.title}
+        images={[`${process.env.NEXT_PUBLIC_URL}${frontmatter.openGraphImage}`]}
+        datePublished={frontmatter.dateISO}
+        authorName={['Jonathan Felipe']}
+        publisherName="Jonathan Felipe"
+        publisherLogo={`${process.env.NEXT_PUBLIC_URL}/assets/img/jonathan.jpg`}
+        description={frontmatter.description}
+      />
 
       <Layout headerStatic>
         <Wrapper>
@@ -30,20 +68,27 @@ const Post = ({ content, frontmatter }) => {
                 <CalendarIcon size={24} /> {frontmatter.date}
               </div>
               <div className="post-read-time">
-                <ClockIcon size={24} /> {frontmatter.readTime} minutos de leitura
+                <ClockIcon size={24} /> {frontmatter.readTime} minutos de
+                leitura
               </div>
             </PostInfo>
           </Content>
 
-          <FeaturedImage />
-          
+          <FeaturedImage
+            style={{ backgroundImage: `url(${frontmatter.featuredImage})` }}
+          />
+
           <Content>
             <ReactMarkdown escapeHtml={false} source={content} />
           </Content>
 
           <Comments>
             <Content>
-              <Disqus id={frontmatter.name} title={frontmatter.title} url="http://localhost:3000/post" />
+              <Disqus
+                id={frontmatter.title}
+                title={frontmatter.title}
+                url="http://localhost:3000/post"
+              />
             </Content>
           </Comments>
         </Wrapper>
@@ -77,18 +122,21 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   const { data, content } = matter(markdownWithMetadata);
 
   const formattedDate = format(data.date, 'dd/MM/yyyy');
+  const dateISO = formatISO(data.date);
 
   const frontmatter = {
     ...data,
     date: formattedDate,
+    dateISO,
   };
 
   return {
     props: {
       content,
       frontmatter,
+      slug,
     },
   };
-}
+};
 
 export default Post;

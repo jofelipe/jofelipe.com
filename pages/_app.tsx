@@ -14,19 +14,19 @@ function App({ Component, pageProps }: AppProps) {
         openGraph={{
           type: 'website',
           locale: 'pt_BR',
-          url: 'https://jofelipe.com/',
+          url: `${process.env.NEXT_PUBLIC_URL}`,
           site_name: 'Jonathan Felipe',
           images: [
             {
-                url: `/assets/img/jonathan.png`,
-                alt: 'Jonathan Felipe',
+              url: `${process.env.NEXT_PUBLIC_URL}/assets/img/jonathan.png`,
+              alt: 'Jonathan Felipe',
             },
           ],
         }}
       />
       <Component {...pageProps} />
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

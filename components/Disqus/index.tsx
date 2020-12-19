@@ -20,7 +20,7 @@ const Disqus: FC<Disqus> = ({ url, id, title }) => {
         language: 'pt_BR',
       }}
     />
-  )
-}
+  );
+};
 
 export default Disqus;

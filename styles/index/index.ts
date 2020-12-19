@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 const titleHome = css`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   font-size: 48px;
   font-weight: 900;
   margin-bottom: 32px;
@@ -64,11 +64,11 @@ export const TextHome = styled.article`
       color: #fff;
       border-bottom: 1px dotted #fff;
       padding-bottom: 2px;
-      transition: all .1s linear;
+      transition: all 0.1s linear;
 
       &:hover {
-        border-bottom-color: ${props => props.theme.colors.primary};
-        color: ${props => props.theme.colors.primary};
+        border-bottom-color: ${(props) => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.primary};
       }
     }
 
@@ -78,7 +78,7 @@ export const TextHome = styled.article`
   }
 
   h1 {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     font-size: 64px;
     line-height: 74px;
     font-weight: 900;
@@ -215,7 +215,7 @@ export const PhotoSocial = styled.div`
 
 export const Social = styled.div`
   p {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     font-size: 18px;
     margin-bottom: 24px;
 
@@ -239,24 +239,23 @@ export const Social = styled.div`
   }
 
   a {
-
     .custom-fill {
-      fill: ${props => props.theme.colors.text};
-      transition: all .1s linear;
+      fill: ${(props) => props.theme.colors.text};
+      transition: all 0.1s linear;
     }
 
     .custom-stroke {
-      stroke: ${props => props.theme.colors.text};
-      transition: all .1s linear;
+      stroke: ${(props) => props.theme.colors.text};
+      transition: all 0.1s linear;
     }
 
     &:hover {
       .custom-fill {
-        fill: ${props => props.theme.colors.primary};
+        fill: ${(props) => props.theme.colors.primary};
       }
 
       .custom-stroke {
-        stroke: ${props => props.theme.colors.primary};
+        stroke: ${(props) => props.theme.colors.primary};
       }
     }
   }
@@ -290,54 +289,6 @@ export const RecentProjects = styled.section`
   }
 `;
 
-export const Project = styled.article`
-  margin-bottom: 8px;
-
-  a {
-    background: ${props => props.theme.colors.card};
-    color: #fff;
-    display: block;
-    padding: 24px;
-    transition: all .1s linear;
-
-    &:hover {
-      background: ${props => shade(0.15, props.theme.colors.card)};
-      opacity: 1 !important;
-    }
-  }
-
-  h3 {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-
-  p {
-    color: ${props => props.theme.colors.text};
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 24px;
-  }
-
-  span {
-    color: ${props => props.theme.colors.textSecondary};
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    text-transform: uppercase;
-
-    svg {
-      margin-right: 8px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    span {
-      font-size: 12px;
-      line-height: 16px;
-    }
-  }
-`;
-
 export const Now = styled.section`
   ${marginBottomHome};
 
@@ -354,11 +305,11 @@ export const Now = styled.section`
       color: #fff;
       border-bottom: 1px dotted #fff;
       padding-bottom: 2px;
-      transition: all .1s linear;
+      transition: all 0.1s linear;
 
       &:hover {
-        border-bottom-color: ${props => props.theme.colors.primary};
-        color: ${props => props.theme.colors.primary};
+        border-bottom-color: ${(props) => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.primary};
       }
     }
 

@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import { Wrapper } from './styles';
 
-const Post: FC = ({ children }) => {
+const Project: FC = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 
-export default Post;
+export default Project;

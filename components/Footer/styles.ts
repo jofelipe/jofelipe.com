@@ -5,7 +5,7 @@ export const Wrapper = styled.footer`
   text-align: center;
 
   p {
-    color: ${props => props.theme.colors.textSecondary};
+    color: ${(props) => props.theme.colors.textSecondary};
     font-size: 14px;
     font-weight: 300;
     line-height: 24px;

@@ -20,12 +20,9 @@ const Main: FC<ILayout> = ({ headerStatic, children }) => {
 
       <Header isStatic={headerStatic} />
 
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </>
-  )
-}
+  );
+};
 
 export default Main;
-

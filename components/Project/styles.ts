@@ -16,37 +16,38 @@ export const Wrapper = styled.article`
 
     &:hover {
       background: ${(props) => shade(0.15, props.theme.colors.card)};
+      opacity: 1 !important;
     }
-  }
-
-  time {
-    color: ${(props) => props.theme.colors.textSecondary};
-    font-size: 14px;
-    font-weight: 300;
-    margin-bottom: 24px;
   }
 
   h3 {
     font-size: 24px;
-    line-height: 32px;
-    font-weight: 400;
-    margin: 24px 0;
+    margin-bottom: 24px;
+  }
 
-    svg {
-      vertical-align: middle !important;
-    }
+  p {
+    color: ${(props) => props.theme.colors.text};
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 24px;
   }
 
   span {
     color: ${(props) => props.theme.colors.textSecondary};
-    font-size: 14px;
-    font-weight: 300;
     display: flex;
     align-items: center;
+    font-size: 14px;
+    text-transform: uppercase;
 
     svg {
-      color: #999;
       margin-right: 8px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    span {
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 `;

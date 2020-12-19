@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.article`
-  padding-top: 32px;
   margin-bottom: 64px;
 
   @media (max-width: 767px) {
@@ -16,7 +15,7 @@ export const Content = styled.div`
   width: 100%;
 
   h1 {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     font-size: 48px;
     line-height: 58px;
     font-weight: 900;
@@ -95,7 +94,7 @@ export const Content = styled.div`
 `;
 
 export const PostInfo = styled.div`
-  color: ${props => props.theme.colors.textSecondary};
+  color: ${(props) => props.theme.colors.textSecondary};
   font-size: 16px;
   font-weight: 300;
   display: flex;
@@ -144,7 +143,9 @@ export const PostInfo = styled.div`
 `;
 
 export const FeaturedImage = styled.div`
-  background: #555;
+  background-color: #fff;
+  background-position: center;
+  background-size: cover;
   height: 480px;
   margin-bottom: 64px;
 

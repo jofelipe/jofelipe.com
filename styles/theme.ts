@@ -5,5 +5,5 @@ export default {
     text: '#DDD',
     textSecondary: '#BBB',
     card: '#333',
-  }
+  },
 } as const;
