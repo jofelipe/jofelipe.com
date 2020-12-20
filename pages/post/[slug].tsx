@@ -1,4 +1,3 @@
-import ReactMarkdown from 'react-markdown/with-html';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -6,14 +5,20 @@ import matter from 'gray-matter';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { IFrontMatterPost } from 'types';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
+import { useRouter } from 'next/router';
 import { format, formatISO } from 'date-fns';
 
 import Layout from 'layouts/main';
 
+import ReactMarkdown from 'components/ReactMarkdown';
 import Disqus from 'components/Disqus';
 import Footer from 'components/Footer';
 
-import { CalendarIcon, ClockIcon } from '@primer/octicons-react';
+import {
+  ChevronLeftIcon,
+  CalendarIcon,
+  ClockIcon,
+} from '@primer/octicons-react';
 
 import {
   Wrapper,
@@ -21,13 +26,16 @@ import {
   PostInfo,
   FeaturedImage,
   Comments,
-} from 'styles/blog/post';
+} from 'styles/content/post';
 
 const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
+  const router = useRouter();
+
   return (
     <>
       <NextSeo
         title={frontmatter.title}
+        description={frontmatter.description}
         openGraph={{
           title: frontmatter.title,
           description: frontmatter.description,
@@ -62,7 +70,16 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
       <Layout headerStatic>
         <Wrapper>
           <Content>
-            <h1>{frontmatter.title}</h1>
+            <header>
+              <button
+                className="btn-back"
+                onClick={() => router.back()}
+                title="Voltar"
+              >
+                <ChevronLeftIcon size={32} />
+              </button>
+              <h1>{frontmatter.title}</h1>
+            </header>
             <PostInfo>
               <div className="post-date">
                 <CalendarIcon size={24} /> {frontmatter.date}
@@ -79,7 +96,7 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
           />
 
           <Content>
-            <ReactMarkdown escapeHtml={false} source={content} />
+            <ReactMarkdown content={content} />
           </Content>
 
           <Comments>

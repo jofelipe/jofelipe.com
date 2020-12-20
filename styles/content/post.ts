@@ -14,12 +14,27 @@ export const Content = styled.div`
   max-width: 780px;
   width: 100%;
 
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .btn-back {
+    background: none;
+    color: ${(props) => props.theme.colors.text};
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    margin: 0 8px 0 -8px;
+  }
+
   h1 {
     color: ${(props) => props.theme.colors.primary};
     font-size: 48px;
     line-height: 58px;
     font-weight: 900;
-    margin-bottom: 24px;
   }
 
   h2 {
@@ -36,6 +51,15 @@ export const Content = styled.div`
     margin-bottom: 24px;
   }
 
+  h5 {
+    color: ${(props) => props.theme.colors.textSecondary};
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
   p {
     font-size: 20px;
     line-height: 30px;
@@ -44,16 +68,75 @@ export const Content = styled.div`
     &:last-of-type {
       margin-bottom: 0;
     }
+
+    a {
+      color: #fff;
+      border-bottom: 1px dotted #fff;
+      padding-bottom: 2px;
+      transition: all 0.1s linear;
+
+      &:hover {
+        border-bottom-color: ${(props) => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.primary};
+      }
+    }
+  }
+
+  ul {
+    margin: 0 0 24px;
+
+    li {
+      font-size: 20px;
+      line-height: 30px;
+      list-style: disc inside none;
+
+      a {
+        color: #fff;
+        border-bottom: 1px dotted #fff;
+        padding-bottom: 2px;
+        transition: all 0.1s linear;
+
+        &:hover {
+          border-bottom-color: ${(props) => props.theme.colors.primary};
+          color: ${(props) => props.theme.colors.primary};
+        }
+      }
+    }
+  }
+
+  ol {
+    margin: 0 0 24px;
+
+    li {
+      font-size: 20px;
+      line-height: 30px;
+      list-style: decimal inside none;
+
+      a {
+        color: #fff;
+        border-bottom: 1px dotted #fff;
+        padding-bottom: 2px;
+        transition: all 0.1s linear;
+
+        &:hover {
+          border-bottom-color: ${(props) => props.theme.colors.primary};
+          color: ${(props) => props.theme.colors.primary};
+        }
+      }
+    }
   }
 
   img {
-    margin-bottom: 24px;
+    display: block;
+    margin: 0 auto 24px;
     max-width: 100%;
     height: auto;
   }
 
   @media (max-width: 1140px) {
-    p {
+    p,
+    ul li,
+    ol li {
       font-size: 18px;
       line-height: 28px;
     }
@@ -75,6 +158,10 @@ export const Content = styled.div`
 
   @media (max-width: 767px) {
     padding: 0 32px;
+
+    header {
+      margin-bottom: 8px;
+    }
 
     h1 {
       font-size: 30px;

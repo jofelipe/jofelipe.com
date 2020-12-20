@@ -48,7 +48,7 @@ const Home = ({ posts, projects }: IHome) => {
                 Front-end Dev.
               </h1>
               <p>
-                👋🏼 Meu objetivo atualmente é desenvolver novos produtos que
+                Meu objetivo atualmente é desenvolver novos produtos que
                 impactam milhões de pessoas no Brasil através da{' '}
                 <a
                   href="https://www.fitcard.com.br/"
@@ -97,9 +97,6 @@ const Home = ({ posts, projects }: IHome) => {
                     alt="TypeScript"
                     title="TypeScript"
                   />
-                </li>
-                <li>
-                  <img src="/assets/svg/jest.svg" alt="Jest" title="Jest" />
                 </li>
               </ul>
             </div>
@@ -157,6 +154,7 @@ const Home = ({ posts, projects }: IHome) => {
                 layout="fixed"
                 width={275}
                 height={275}
+                quality={100}
               />
             </PhotoSocial>
 
@@ -207,15 +205,16 @@ const Home = ({ posts, projects }: IHome) => {
 
               <div className="hover-effect">
                 <Project>
-                  <Link href="/">
+                  <Link href="/post/criando-uma-rede-social-do-zero">
                     <a>
                       <h3>Peakseekers</h3>
                       <p>
-                        Uma descrição bem curta sobre este projeto e seus
-                        diferenciais
+                        Peakseekers é um aplicativo específico para aventureiros
+                        compartilharem motivações, emoções, dicas e suas
+                        reflexões sobre a relação de humanos com montanhas
                       </p>
                       <span>
-                        <ZapIcon size={16} /> UI Design, Desenvolvimento
+                        <ZapIcon size={16} /> UI/UX Design, Desenvolvimento
                         Front-end &amp; Back-end
                       </span>
                     </a>

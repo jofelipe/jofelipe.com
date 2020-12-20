@@ -41,6 +41,7 @@ export const Wrapper = styled.article`
 
     svg {
       margin-right: 8px;
+      min-width: 16px;
     }
   }
 

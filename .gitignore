@@ -32,3 +32,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# aff
+/public/adam
+/public/cert

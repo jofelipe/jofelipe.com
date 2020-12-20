@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Wrapper = styled.section`
   padding: 0 64px;
@@ -43,6 +44,7 @@ export const Search = styled.div`
   margin-bottom: 32px;
 
   svg {
+    color: ${(props) => props.theme.colors.text};
     position: absolute;
     top: 0;
     left: 24px;
@@ -53,7 +55,7 @@ export const Search = styled.div`
   input {
     background: #151515;
     border: 0;
-    color: #666;
+    color: ${(props) => props.theme.colors.text};
     font-size: 24px;
     font-weight: 300;
     padding: 24px 24px 24px 72px;
@@ -85,5 +87,37 @@ export const NoPostsFound = styled.div`
     font-size: 18px;
     margin-top: 8px;
     text-align: center;
+  }
+`;
+
+export const ErrorWrapper = styled.section`
+  text-align: center;
+  margin-bottom: 128px;
+
+  p {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0 0 24px;
+  }
+
+  .btn-home {
+    background: ${(props) => props.theme.colors.primary};
+    border: 0;
+    padding: 8px 16px;
+    display: inline-block;
+    transition: all 0.1s linear;
+
+    &:hover {
+      background: ${(props) => shade(0.2, props.theme.colors.primary)};
+    }
+  }
+
+  @media (max-width: 1140px) {
+    margin-bottom: 64px;
+
+    p {
+      font-size: 18px;
+      line-height: 28px;
+    }
   }
 `;

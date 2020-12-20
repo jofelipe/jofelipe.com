@@ -29,16 +29,17 @@ const Projects = ({ projects }: IProjects) => {
 
           <div className="mansory">
             <Project>
-              <Link href="/">
+              <Link href="/post/criando-uma-rede-social-do-zero">
                 <a>
                   <h3>Peakseekers</h3>
                   <p>
-                    Uma descrição bem curta sobre este projeto e seus
-                    diferenciais
+                    Peakseekers é um aplicativo específico para aventureiros
+                    compartilharem motivações, emoções, dicas e suas reflexões
+                    sobre a relação de humanos com montanhas
                   </p>
                   <span>
-                    <ZapIcon size={16} /> UI Design, Desenvolvimento Front-end
-                    &amp; Back-end
+                    <ZapIcon size={16} /> UI/UX Design, Desenvolvimento
+                    Front-end &amp; Back-end
                   </span>
                 </a>
               </Link>

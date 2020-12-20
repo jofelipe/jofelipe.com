@@ -25,6 +25,7 @@ export default createGlobalStyle`
   }
 
   a {
+    color: #fff;
     text-decoration: none;
   }
 

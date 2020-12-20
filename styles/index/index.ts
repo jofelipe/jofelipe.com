@@ -137,7 +137,7 @@ export const TextHome = styled.article`
 
       li {
         list-style: none;
-        width: 32px;
+        width: 40px;
 
         img {
           max-width: 100%;

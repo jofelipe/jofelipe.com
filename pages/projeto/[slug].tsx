@@ -1,4 +1,3 @@
-import ReactMarkdown from 'react-markdown/with-html';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -6,20 +5,25 @@ import matter from 'gray-matter';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { IFrontMatterProject } from 'types';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 
 import Layout from 'layouts/main';
 
+import ReactMarkdown from 'components/ReactMarkdown';
 import Footer from 'components/Footer';
 
-import { ZapIcon } from '@primer/octicons-react';
+import { ChevronLeftIcon, ZapIcon } from '@primer/octicons-react';
 
-import { Wrapper, Content, PostInfo, FeaturedImage } from 'styles/blog/post';
+import { Wrapper, Content, PostInfo, FeaturedImage } from 'styles/content/post';
 
 const Project = ({ content, frontmatter, slug }: IFrontMatterProject) => {
+  const router = useRouter();
+
   return (
     <>
       <NextSeo
         title={frontmatter.title}
+        description={frontmatter.description}
         openGraph={{
           title: frontmatter.title,
           description: frontmatter.description,
@@ -39,7 +43,16 @@ const Project = ({ content, frontmatter, slug }: IFrontMatterProject) => {
       <Layout headerStatic>
         <Wrapper>
           <Content>
-            <h1>{frontmatter.title}</h1>
+            <header>
+              <button
+                className="btn-back"
+                onClick={() => router.back()}
+                title="Voltar"
+              >
+                <ChevronLeftIcon size={32} />
+              </button>
+              <h1>{frontmatter.title}</h1>
+            </header>
             <PostInfo>
               <div className="project-role">
                 <ZapIcon size={24} /> {frontmatter.roles}
@@ -52,7 +65,7 @@ const Project = ({ content, frontmatter, slug }: IFrontMatterProject) => {
           />
 
           <Content>
-            <ReactMarkdown escapeHtml={false} source={content} />
+            <ReactMarkdown content={content} />
           </Content>
         </Wrapper>
 
