@@ -113,6 +113,7 @@ const Home = ({ posts, projects }: IHome) => {
                     <a
                       href="https://linkedin.com/in/jofelipe"
                       title="Linkedin"
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Linkedin />
@@ -122,6 +123,7 @@ const Home = ({ posts, projects }: IHome) => {
                     <a
                       href="https://github.com/jofelipe"
                       title="GitHub"
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <GitHub />
@@ -131,6 +133,7 @@ const Home = ({ posts, projects }: IHome) => {
                     <a
                       href="https://peakseekers.app/jow"
                       title="Peakseekers"
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Peakseekers />
@@ -140,6 +143,7 @@ const Home = ({ posts, projects }: IHome) => {
                     <a
                       href="https://my.flightradar24.com/jofelipe"
                       title="myFlightradar24"
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <FlightRadar />
