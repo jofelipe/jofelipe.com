@@ -57,7 +57,7 @@ export const TextHome = styled.article`
 
   p {
     font-size: 20px;
-    line-height: 30px;
+    line-height: 32px;
     margin: 0 0 32px;
 
     a {
@@ -298,7 +298,7 @@ export const Now = styled.section`
 
   p {
     font-size: 20px;
-    line-height: 30px;
+    line-height: 32px;
     margin: 0 0 32px;
 
     a {

@@ -159,6 +159,7 @@ const Home = ({ posts, projects }: IHome) => {
                 width={275}
                 height={275}
                 quality={100}
+                loading="eager"
               />
             </PhotoSocial>
 

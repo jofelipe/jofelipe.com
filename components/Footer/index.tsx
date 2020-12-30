@@ -31,6 +31,7 @@ const Footer = () => {
               width={64}
               height={64}
               layout="fixed"
+              loading="eager"
             />
           </div>
         )}

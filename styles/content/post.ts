@@ -54,7 +54,7 @@ export const Content = styled.div`
   h5 {
     color: ${(props) => props.theme.colors.textSecondary};
     font-size: 20px;
-    line-height: 30px;
+    line-height: 32px;
     font-weight: 300;
     font-style: italic;
     margin-bottom: 24px;
@@ -62,7 +62,7 @@ export const Content = styled.div`
 
   p {
     font-size: 20px;
-    line-height: 30px;
+    line-height: 32px;
     margin: 0 0 24px;
 
     &:last-of-type {
@@ -87,7 +87,7 @@ export const Content = styled.div`
 
     li {
       font-size: 20px;
-      line-height: 30px;
+      line-height: 32px;
       list-style: disc inside none;
 
       a {
@@ -109,7 +109,7 @@ export const Content = styled.div`
 
     li {
       font-size: 20px;
-      line-height: 30px;
+      line-height: 32px;
       list-style: decimal inside none;
 
       a {
