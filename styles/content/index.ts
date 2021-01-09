@@ -39,6 +39,29 @@ export const Wrapper = styled.section`
   }
 `;
 
+export const BlogHeader = styled.header`
+  margin-bottom: 64px;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 32px;
+
+    p {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+`;
+
 export const Search = styled.div`
   position: relative;
   margin-bottom: 32px;
@@ -81,7 +104,7 @@ export const NoPostsFound = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
   break-inside: avoid;
-  font-size: 24px;
+  font-size: 20px;
 
   @media (max-width: 960px) {
     font-size: 18px;

@@ -39,34 +39,4 @@ function getPosts() {
     });
 }
 
-function getProjects() {
-  const dir = `${process.cwd()}/content/projects/`;
-  const files = fs.readdirSync(dir);
-
-  return files
-    .sort(function (a, b) {
-      const fileA = readFile('content/projects', a);
-      const dataA = matter(fileA);
-
-      const fileB = readFile('content/projects', b);
-      const dataB = matter(fileB);
-
-      return dataB.data.date - dataA.data.date;
-    })
-    .map((filename) => {
-      const fileWithMetadata = readFile('content/projects', filename);
-
-      const { data } = matter(fileWithMetadata);
-
-      const frontmatter = {
-        ...data,
-      };
-
-      return {
-        slug: filename.replace('.md', ''),
-        frontmatter,
-      };
-    });
-}
-
-export { getPosts, getProjects };
+export { getPosts };

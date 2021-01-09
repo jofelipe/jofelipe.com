@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { GetStaticProps } from 'next';
-import { IFrontMatterPost, IFrontMatterProject } from 'types';
+import { IFrontMatterPost } from 'types';
 import { NextSeo } from 'next-seo';
-import { getPosts, getProjects } from 'services/getStaticFiles';
+import { getPosts } from 'services/getStaticFiles';
 
 import Layout from 'layouts/main';
 
@@ -31,10 +31,9 @@ import {
 
 interface IHome {
   posts: IFrontMatterPost[];
-  projects: IFrontMatterProject[];
 }
 
-const Home = ({ posts, projects }: IHome) => {
+const Home = ({ posts }: IHome) => {
   return (
     <>
       <NextSeo title="Página inicial" />
@@ -171,10 +170,10 @@ const Home = ({ posts, projects }: IHome) => {
                   .slice(0, 6)
                   .map(
                     ({
-                      frontmatter: { title, readTime, date, fromMedium, url },
+                      frontmatter: { title, readTime, date, external, url },
                       slug,
                     }) =>
-                      fromMedium ? (
+                      external ? (
                         <Post key={slug}>
                           <a href={url} target="_blank">
                             <time>{date}</time>
@@ -225,22 +224,6 @@ const Home = ({ posts, projects }: IHome) => {
                     </a>
                   </Link>
                 </Project>
-
-                {projects.map(
-                  ({ frontmatter: { title, description, roles }, slug }) => (
-                    <Project key={title}>
-                      <Link href={'/projeto/[slug]'} as={`/projeto/${slug}`}>
-                        <a>
-                          <h3>{title}</h3>
-                          <p>{description}</p>
-                          <span>
-                            <ZapIcon size={16} /> {roles}
-                          </span>
-                        </a>
-                      </Link>
-                    </Project>
-                  )
-                )}
               </div>
             </RecentProjects>
 
@@ -322,12 +305,10 @@ const Home = ({ posts, projects }: IHome) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = getPosts();
-  const projects = getProjects();
 
   return {
     props: {
       posts,
-      projects,
     },
   };
 };

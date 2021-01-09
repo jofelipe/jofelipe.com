@@ -17,7 +17,7 @@ import {
   SearchIcon,
 } from '@primer/octicons-react';
 
-import { Wrapper, Search, NoPostsFound } from 'styles/content';
+import { Wrapper, BlogHeader, Search, NoPostsFound } from 'styles/content';
 
 interface IBlog {
   posts: IFrontMatterPost[];
@@ -35,7 +35,13 @@ const Blog = ({ posts }: IBlog) => {
 
       <Layout headerStatic>
         <Wrapper>
-          <h1>Blog</h1>
+          <BlogHeader>
+            <h1>Blog</h1>
+            <p>
+              Aqui escrevo sobre meus hobbies, viagens e às vezes alguma coisa
+              técnica 😅
+            </p>
+          </BlogHeader>
 
           <Search>
             <SearchIcon size={32} />
@@ -50,10 +56,10 @@ const Blog = ({ posts }: IBlog) => {
             {!searchValue &&
               posts.map(
                 ({
-                  frontmatter: { title, readTime, date, fromMedium, url },
+                  frontmatter: { title, readTime, date, external, url },
                   slug,
                 }) =>
-                  fromMedium ? (
+                  external ? (
                     <Post key={slug}>
                       <a href={url} target="_blank">
                         <time>{date}</time>
@@ -87,7 +93,7 @@ const Blog = ({ posts }: IBlog) => {
 
             {searchValue &&
               filteredBlogPosts.map((post) =>
-                post.frontmatter.fromMedium ? (
+                post.frontmatter.external ? (
                   <Post key={post.slug}>
                     <a href={post.frontmatter.url} target="_blank">
                       <time>{post.frontmatter.date}</time>

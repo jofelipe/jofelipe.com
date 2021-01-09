@@ -6,7 +6,7 @@ interface IPost {
   dateISO: string;
   featuredImage?: string;
   openGraphImage?: string;
-  fromMedium?: boolean;
+  external?: boolean;
   url?: string;
 }
 

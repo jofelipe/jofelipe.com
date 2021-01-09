@@ -10,6 +10,11 @@ export const Wrapper = styled.footer`
     font-weight: 300;
     line-height: 24px;
     margin: 0;
+
+    a {
+      display: inline-block;
+      font-size: 80%;
+    }
   }
 
   @media (max-width: 767px) {
