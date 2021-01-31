@@ -15,6 +15,11 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  main {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
   ul {
     padding: 0;
     margin: 0;

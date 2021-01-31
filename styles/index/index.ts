@@ -26,7 +26,7 @@ const marginBottomHome = css`
   }
 `;
 
-export const Wrapper = styled.main`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   min-height: 100%;
@@ -97,6 +97,13 @@ export const TextHome = styled.article`
     }
   }
 
+  @media (min-width: 1900px) {
+    .fixed-scroll {
+      max-width: 800px;
+      padding-left: 0;
+    }
+  }
+
   @media (max-width: 1140px) {
     .fixed-scroll {
       padding-right: 32px;
@@ -155,6 +162,10 @@ export const TextHome = styled.article`
 export const Content = styled.section`
   padding: 0 64px;
   flex: 1;
+
+  @media (min-width: 1900px) {
+    padding-right: 0;
+  }
 
   @media (max-width: 1140px) {
     padding-left: 32px;

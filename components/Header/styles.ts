@@ -10,15 +10,20 @@ interface IMenu {
 
 export const Wrapper = styled.header<IHeader>`
   background: ${(props) => props.theme.colors.background};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 64px;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 10;
+
+  .alignment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
 
   .logo {
     color: #fff;
