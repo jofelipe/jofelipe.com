@@ -47,11 +47,17 @@ export const Wrapper = styled.header<IHeader>`
   }
 
   @media (max-width: 767px) {
+    display: flex;
+    justify-content: space-between;
     position: static;
     padding: 32px;
 
     .logo {
       font-size: 20px;
+    }
+
+    .alignment {
+      margin: 0;
     }
   }
 `;
