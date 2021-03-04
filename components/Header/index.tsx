@@ -30,8 +30,8 @@ const Header: FC<IHeader> = ({ isStatic }) => {
               </Link>
             </li>
             <li>
-              <Link href="/projetos">
-                <a>Projetos</a>
+              <Link href="/setup">
+                <a>Setup</a>
               </Link>
             </li>
           </ul>

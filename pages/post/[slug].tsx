@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { useState, useEffect } from 'react';
 import { IFrontMatterPost } from 'types';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -15,9 +16,10 @@ import Disqus from 'components/Disqus';
 import Footer from 'components/Footer';
 
 import {
-  ChevronLeftIcon,
+  ArrowLeftIcon,
   CalendarIcon,
   ClockIcon,
+  ArrowUpIcon,
 } from '@primer/octicons-react';
 
 import {
@@ -26,10 +28,29 @@ import {
   PostInfo,
   FeaturedImage,
   Comments,
+  BackToTop,
 } from 'styles/content/post';
 
 const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
   const router = useRouter();
+
+  const [showScroll, setShowScroll] = useState(false);
+
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
+    }
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', checkScrollTop);
+  }, [checkScrollTop]);
 
   return (
     <>
@@ -76,7 +97,7 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
                 onClick={() => router.back()}
                 title="Voltar"
               >
-                <ChevronLeftIcon size={32} />
+                <ArrowLeftIcon size={32} />
               </button>
               <h1>{frontmatter.title}</h1>
             </header>
@@ -109,6 +130,14 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
             </Content>
           </Comments>
         </Wrapper>
+
+        <BackToTop
+          onClick={scrollTop}
+          title="Voltar para o topo"
+          style={{ display: showScroll ? 'block' : 'none' }}
+        >
+          <ArrowUpIcon size={32} />
+        </BackToTop>
 
         <Footer />
       </Layout>

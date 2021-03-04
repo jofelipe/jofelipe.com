@@ -79,15 +79,15 @@ const Home = ({ posts }: IHome) => {
                 <li>
                   <img
                     src="/assets/svg/react-react-native.svg"
-                    alt="React &amp; React Native"
-                    title="React &amp; React Native"
+                    alt="ReactJS"
+                    title="ReactJS"
                   />
                 </li>
                 <li>
                   <img
                     src="/assets/svg/nextjs.svg"
-                    alt="Next.js"
-                    title="Next.js"
+                    alt="NextJS"
+                    title="NextJS"
                   />
                 </li>
                 <li>

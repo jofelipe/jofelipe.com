@@ -38,8 +38,7 @@ const Blog = ({ posts }: IBlog) => {
           <BlogHeader>
             <h1>Blog</h1>
             <p>
-              Aqui escrevo sobre meus hobbies, viagens e às vezes alguma coisa
-              técnica 😅
+              Aqui escrevo sobre meus hobbies, viagens e o mundo front-end 😊
             </p>
           </BlogHeader>
 

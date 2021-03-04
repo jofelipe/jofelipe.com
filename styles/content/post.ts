@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IContent {
+  isPage?: boolean;
+}
+
 export const Wrapper = styled.article`
   margin-bottom: 64px;
 
@@ -9,10 +13,11 @@ export const Wrapper = styled.article`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<IContent>`
   margin: 0 auto;
   max-width: 780px;
   width: 100%;
+  margin-bottom: ${(props) => (props.isPage ? '64px' : '0')};
 
   header {
     display: flex;
@@ -27,7 +32,7 @@ export const Content = styled.div`
     padding: 0;
     border: 0;
     outline: 0;
-    margin: 0 8px 0 -8px;
+    margin: 0 24px 0 -8px;
   }
 
   h1 {
@@ -65,7 +70,7 @@ export const Content = styled.div`
     line-height: 32px;
     margin: 0 0 24px;
 
-    &:last-of-type {
+    &:last-of-type:not(.margin) {
       margin-bottom: 0;
     }
 
@@ -102,6 +107,10 @@ export const Content = styled.div`
         }
       }
     }
+  }
+
+  .margin {
+    margin-bottom: 24px;
   }
 
   ol {
@@ -157,7 +166,7 @@ export const Content = styled.div`
   }
 
   @media (max-width: 767px) {
-    padding: 0 32px;
+    padding: ${(props) => (props.isPage ? '0' : '0 32px')};
 
     header {
       margin-bottom: 8px;
@@ -248,4 +257,18 @@ export const FeaturedImage = styled.div`
 
 export const Comments = styled.div`
   padding-top: 32px;
+`;
+
+export const BackToTop = styled.button`
+  background: none;
+  border: 0;
+  color: ${(props) => props.theme.colors.text};
+  cursor: pointer;
+  position: fixed;
+  right: 16px;
+  bottom: 24px;
+
+  &:focus {
+    outline: 0;
+  }
 `;

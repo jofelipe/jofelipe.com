@@ -177,19 +177,40 @@ export const Content = styled.section`
 `;
 
 export const PhotoSocial = styled.div`
-  background: url(/assets/svg/checkered.svg) no-repeat;
+  background: url(/assets/svg/checkered.svg) no-repeat right top;
   display: flex;
   align-items: flex-end;
-  width: 552px;
+  margin-left: auto;
+  position: relative;
   ${marginBottomHome};
 
   div:nth-child(2) {
     margin: 81px 0 0 auto;
   }
 
-  @media (max-width: 1400px) {
-    width: 460px;
+  &:before {
+    content: none;
+    background: linear-gradient(
+      to right,
+      rgba(34, 34, 34, 1) 0%,
+      rgba(34, 34, 34, 1) 25%,
+      rgba(34, 34, 34, 0) 100%
+    );
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
 
+  @media (max-width: 1700px) {
+    &:before {
+      content: '';
+    }
+  }
+
+  @media (max-width: 1400px) {
     div:nth-child(2) {
       margin-top: 161px;
       width: 184px !important;
@@ -198,9 +219,6 @@ export const PhotoSocial = styled.div`
   }
 
   @media (max-width: 1140px) {
-    width: 368px;
-    position: relative;
-
     div:nth-child(2) {
       margin-top: 81px;
       position: absolute !important;
@@ -214,6 +232,7 @@ export const PhotoSocial = styled.div`
   }
 
   @media (max-width: 767px) {
+    background-position: left top;
     width: auto;
     margin: 0 -32px 64px;
 
@@ -221,10 +240,16 @@ export const PhotoSocial = styled.div`
       right: auto;
       left: 184px;
     }
+
+    &:before {
+      content: none;
+    }
   }
 `;
 
 export const Social = styled.div`
+  position: relative;
+
   p {
     color: ${(props) => props.theme.colors.text};
     font-size: 18px;
