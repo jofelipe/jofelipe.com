@@ -186,6 +186,14 @@ export const Content = styled.div<IContent>`
       font-size: 18px;
       line-height: 28px;
     }
+
+    .btn-back {
+      margin-right: 16px;
+
+      svg {
+        width: 24px;
+      }
+    }
   }
 `;
 
@@ -270,5 +278,14 @@ export const BackToTop = styled.button`
 
   &:focus {
     outline: 0;
+  }
+
+  @media (max-width: 767px) {
+    right: 0;
+    bottom: 8px;
+
+    svg {
+      width: 24px;
+    }
   }
 `;

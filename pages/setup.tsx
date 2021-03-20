@@ -22,8 +22,8 @@ const Projects = () => {
             </p>
             <p className="margin">
               Todos os itens foram acumulados nos últimos anos em que alternei
-              entre trabalho presencial e home office, com uma atualização
-              chegando 😎
+              entre trabalho presencial e remoto, com uma atualização chegando
+              em breve 😎
             </p>
 
             <h3>Computador/Escritório</h3>
@@ -33,7 +33,7 @@ const Projects = () => {
               <li>Logitech MX Anywhere 2S</li>
               <li>Logitech MX Keys</li>
               <li>Cadeira Alpha Gamer Vega Black</li>
-              <li>Google Home Mini</li>
+              <li>Amazon Echo Show 5</li>
             </ul>
 
             <h3>Código</h3>
@@ -59,7 +59,7 @@ const Projects = () => {
                   Omni
                 </a>
               </li>
-              <li>Terminal: Windows Terminal/ZSH</li>
+              <li>Terminal: Windows Terminal/Oh My Zsh</li>
             </ul>
 
             <h3>Áudio/Vídeo</h3>
