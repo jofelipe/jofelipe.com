@@ -45,7 +45,7 @@ const Header: FC<IHeader> = ({ isStatic }) => {
               </Link>
             </li>
             <li>
-              <a href="https://trips.jofelipe.com/sobre">Trips</a>
+              <a href="https://trips.jofelipe.com/">Trips</a>
             </li>
           </ul>
         </Menu>
