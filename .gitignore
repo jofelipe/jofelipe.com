@@ -36,3 +36,4 @@ yarn-error.log*
 # aff
 /public/adam
 /public/cert
+/public/emkt
