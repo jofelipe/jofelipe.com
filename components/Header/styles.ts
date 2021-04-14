@@ -76,6 +76,10 @@ export const Menu = styled.nav<IMenu>`
     }
   }
 
+  .active a {
+    color: ${(props) => props.theme.colors.primary};
+  }
+
   a {
     color: #fff;
     transition: all 0.15s linear;

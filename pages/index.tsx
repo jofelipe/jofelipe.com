@@ -231,7 +231,7 @@ const Home = ({ posts }: IHome) => {
               <h4>Agora</h4>
               <p>
                 Extremamente curioso, passo meu tempo livre buscando aprender
-                mais sobre meus hobbies atuais: Astronomia e Fotografia.
+                mais sobre meus hobbies atuais: Astronomia e Contrabaixo.
               </p>
               <p>
                 Fora da internet, busco me conectar a natureza através do
@@ -254,13 +254,13 @@ const Home = ({ posts }: IHome) => {
                 >
                   Rammstein
                 </a>
-                , estudei muito sobre Desenvolvimento Web através dos canais{' '}
+                , estudei muito sobre Desenvolvimento Web através dos canais do{' '}
                 <a
-                  href="https://www.youtube.com/channel/UCSfwM5u0Kce6Cce8_S72olg"
+                  href="https://www.youtube.com/user/willjusten"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Rocketseat
+                  Willian Justen
                 </a>{' '}
                 e{' '}
                 <a
@@ -286,8 +286,8 @@ const Home = ({ posts }: IHome) => {
                 >
                   UI Lab
                 </a>
-                , e por fim, li muito sobre Biologia, Privacidade e os
-                malefícios das redes sociais.
+                , e por fim, li muito sobre Biologia, Finanças e O mundo
+                assombrado pelos demônios.
               </p>
               <p>
                 E é isso. Caso queira falar um “oi”, me encontre em{' '}

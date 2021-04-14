@@ -1,4 +1,5 @@
 import { useState, FC } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { Wrapper, Menu, MobileMenu } from './styles';
@@ -8,6 +9,8 @@ interface IHeader {
 }
 
 const Header: FC<IHeader> = ({ isStatic }) => {
+  const router = useRouter();
+
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -19,20 +22,30 @@ const Header: FC<IHeader> = ({ isStatic }) => {
 
         <Menu isOpen={openMenu}>
           <ul>
-            <li>
+            <li className={router.pathname === '/' ? 'active' : ''}>
               <Link href="/">
                 <a>Home</a>
               </Link>
             </li>
-            <li>
+            <li
+              className={
+                router.pathname.includes('blog') ||
+                router.pathname.includes('post')
+                  ? 'active'
+                  : ''
+              }
+            >
               <Link href="/blog">
                 <a>Blog</a>
               </Link>
             </li>
-            <li>
+            <li className={router.pathname === '/setup' ? 'active' : ''}>
               <Link href="/setup">
                 <a>Setup</a>
               </Link>
+            </li>
+            <li>
+              <a href="https://trips.jofelipe.com/sobre">Trips</a>
             </li>
           </ul>
         </Menu>
