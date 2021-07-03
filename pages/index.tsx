@@ -231,7 +231,7 @@ const Home = ({ posts }: IHome) => {
               <h4>Agora</h4>
               <p>
                 Extremamente curioso, passo meu tempo livre buscando aprender
-                mais sobre meus hobbies atuais: Astronomia e Contrabaixo.
+                mais sobre meus hobbies atuais: Astronomia e Baixo 🎸
               </p>
               <p>
                 Fora da internet, busco me conectar a natureza através do
@@ -240,19 +240,19 @@ const Home = ({ posts }: IHome) => {
               <p>
                 O que fiz nos últimos meses? Escutei muito{' '}
                 <a
-                  href="https://open.spotify.com/artist/4RnBFZRiMLRyZy0AzzTg2C"
+                  href="https://open.spotify.com/artist/1Ffb6ejR6Fe5IamqA5oRUF"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Run The Jewels
+                  Bring Me The Horizon
                 </a>{' '}
                 e{' '}
                 <a
-                  href="https://open.spotify.com/artist/6wWVKhxIU2cEi0K81v7HvP"
+                  href="https://open.spotify.com/artist/7c8kQb9AUntvapfnuC3IhF"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Rammstein
+                  Terno Rei
                 </a>
                 , estudei muito sobre Desenvolvimento Web através dos canais do{' '}
                 <a
@@ -272,22 +272,22 @@ const Home = ({ posts }: IHome) => {
                 </a>
                 , me atualizei através das newsletters da{' '}
                 <a
-                  href="https://thehack.com.br/"
+                  href="https://medium.com/startup-da-real/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  The Hack
+                  Startup da Real
                 </a>{' '}
                 e{' '}
                 <a
-                  href="https://uilab.com.br/"
+                  href="https://manualdousuario.net/acompanhe/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  UI Lab
+                  Manual do Usuário
                 </a>
-                , e por fim, li muito sobre Biologia, Finanças e O mundo
-                assombrado pelos demônios.
+                , e por fim, li muito sobre Astronomia, Finanças e biografias em
+                geral.
               </p>
               <p>
                 E é isso. Caso queira falar um “oi”, me encontre em{' '}

@@ -60,6 +60,8 @@ export const NowPlaying = styled.div`
 
     p {
       line-height: 18px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
