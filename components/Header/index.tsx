@@ -39,11 +39,11 @@ const Header: FC<IHeader> = ({ isStatic }) => {
                 <a>Blog</a>
               </Link>
             </li>
-            {/* <li className={router.pathname === '/setup' ? 'active' : ''}>
+            <li className={router.pathname === '/setup' ? 'active' : ''}>
               <Link href="/setup">
                 <a>Setup</a>
               </Link>
-            </li> */}
+            </li>
             <li>
               <a href="https://trips.jofelipe.com/">Trips</a>
             </li>

@@ -1,13 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import client from 'graphql/client';
 
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { useState, useEffect } from 'react';
-import { IFrontMatterPost } from 'types';
+import { GetStaticProps } from 'next';
+import { GET_POSTS, GET_POST_BY_SLUG } from 'graphql/queries';
+import { GetPostsQuery, GetPostBySlugQuery } from 'graphql/generated/graphql';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { format, formatISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 import Layout from 'layouts/main';
 
@@ -31,7 +30,7 @@ import {
   BackToTop,
 } from 'styles/content/post';
 
-const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
+export default function Post({ post }: GetPostBySlugQuery) {
   const router = useRouter();
 
   const [showScroll, setShowScroll] = useState(false);
@@ -52,26 +51,41 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
     window.addEventListener('scroll', checkScrollTop);
   }, [checkScrollTop]);
 
+  if (router.isFallback) {
+    return null;
+  }
+
+  const {
+    content,
+    date,
+    description,
+    featuredImage,
+    readTime,
+    slug,
+    title,
+    openGraphImage,
+  } = post;
+
   return (
     <>
       <NextSeo
-        title={frontmatter.title}
-        description={frontmatter.description}
+        title={title}
+        description={description}
         openGraph={{
-          title: frontmatter.title,
-          description: frontmatter.description,
+          title: title,
+          description: description,
           url: `${process.env.NEXT_PUBLIC_URL}/post/${slug}`,
           type: 'article',
           article: {
-            publishedTime: frontmatter.dateISO,
+            publishedTime: date,
             authors: [`${process.env.NEXT_PUBLIC_URL}/`],
           },
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}${frontmatter.openGraphImage}`,
+              url: `${process.env.NEXT_PUBLIC_URL}${openGraphImage.url}`,
               width: 1200,
               height: 1200,
-              alt: frontmatter.title,
+              alt: title,
             },
           ],
         }}
@@ -79,13 +93,13 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
 
       <ArticleJsonLd
         url={`${process.env.NEXT_PUBLIC_URL}/post/${slug}`}
-        title={frontmatter.title}
-        images={[`${process.env.NEXT_PUBLIC_URL}${frontmatter.openGraphImage}`]}
-        datePublished={frontmatter.dateISO}
+        title={title}
+        images={[`${process.env.NEXT_PUBLIC_URL}${openGraphImage.url}`]}
+        datePublished={date}
         authorName={['Jonathan Felipe']}
         publisherName="Jonathan Felipe"
         publisherLogo={`${process.env.NEXT_PUBLIC_URL}/assets/img/jonathan.jpg`}
-        description={frontmatter.description}
+        description={description}
       />
 
       <Layout headerStatic>
@@ -99,21 +113,21 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
               >
                 <ArrowLeftIcon size={32} />
               </button>
-              <h1>{frontmatter.title}</h1>
+              <h1>{title}</h1>
             </header>
             <PostInfo>
               <div className="post-date">
-                <CalendarIcon size={24} /> {frontmatter.date}
+                <CalendarIcon size={24} />{' '}
+                {format(parseISO(date), 'dd/MM/yyyy')}
               </div>
               <div className="post-read-time">
-                <ClockIcon size={24} /> {frontmatter.readTime} minutos de
-                leitura
+                <ClockIcon size={24} /> {readTime} minutos de leitura
               </div>
             </PostInfo>
           </Content>
 
           <FeaturedImage
-            style={{ backgroundImage: `url(${frontmatter.featuredImage})` }}
+            style={{ backgroundImage: `url(${featuredImage.url})` }}
           />
 
           <Content>
@@ -123,9 +137,9 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
           <Comments>
             <Content>
               <Disqus
-                id={frontmatter.title}
-                title={frontmatter.title}
-                url="http://localhost:3000/post"
+                id={title}
+                title={title}
+                url={`${process.env.NEXT_PUBLIC_URL}/post/${slug}`}
               />
             </Content>
           </Comments>
@@ -143,46 +157,37 @@ const Post = ({ content, frontmatter, slug }: IFrontMatterPost) => {
       </Layout>
     </>
   );
-};
+}
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync('content/posts');
+export async function getStaticPaths() {
+  const { posts } = await client.request<GetPostsQuery>(GET_POSTS, {
+    first: 50,
+  });
 
-  const paths = files.map((filename) => ({
-    params: {
-      slug: filename.replace('.md', ''),
-    },
+  const paths = posts.map(({ slug }) => ({
+    params: { slug },
   }));
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
-};
+}
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
-  const markdownWithMetadata = fs
-    .readFileSync(path.join('content/posts', slug + '.md'))
-    .toString();
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { post } = await client.request<GetPostBySlugQuery>(GET_POST_BY_SLUG, {
+    slug: `${params?.slug}`,
+  });
 
-  const { data, content } = matter(markdownWithMetadata);
-
-  const formattedDate = format(data.date, 'dd/MM/yyyy');
-  const dateISO = formatISO(data.date);
-
-  const frontmatter = {
-    ...data,
-    date: formattedDate,
-    dateISO,
-  };
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      content,
-      frontmatter,
-      slug,
+      post,
     },
   };
 };
-
-export default Post;

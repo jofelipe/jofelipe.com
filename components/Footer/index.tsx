@@ -23,37 +23,41 @@ const Footer = () => {
 
   return (
     <Wrapper>
-      <NowPlaying title="Spotify">
-        {data?.albumImageUrl && (
-          <div className="cover">
-            <Image
-              src={data.albumImageUrl}
-              width={64}
-              height={64}
-              layout="fixed"
-              loading="eager"
+      {data?.title && (
+        <NowPlaying title="Spotify">
+          {data?.albumImageUrl && (
+            <div className="cover">
+              <Image
+                src={data.albumImageUrl}
+                width={64}
+                height={64}
+                layout="fixed"
+                loading="eager"
+              />
+            </div>
+          )}
+
+          <div className="info">
+            <a href={data?.songUrl} target="_blank" rel="noopener noreferrer">
+              <strong>{data.title}</strong>
+              <p>{data?.artist}</p>
+            </a>
+          </div>
+          <div className="animation">
+            <Lottie
+              loop
+              animationData={playingAnimation}
+              play
+              speed={0.5}
+              style={{
+                width: 24,
+                height: 24,
+              }}
             />
           </div>
-        )}
-        <div className="info">
-          <a href={data?.songUrl} target="_blank" rel="noopener noreferrer">
-            <strong>{data?.artist || 'Spotify'}</strong>
-            <p>{data?.title || 'Nenhuma música em execução'}</p>
-          </a>
-        </div>
-        <div className="animation">
-          <Lottie
-            loop
-            animationData={playingAnimation}
-            play
-            speed={0.5}
-            style={{
-              width: 24,
-              height: 24,
-            }}
-          />
-        </div>
-      </NowPlaying>
+        </NowPlaying>
+      )}
+
       <p>Feito com ❤️ ouvindo New Order 🕺🏼</p>
     </Wrapper>
   );

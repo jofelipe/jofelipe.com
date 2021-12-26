@@ -1,15 +1,19 @@
 import Link from 'next/link';
+import client from 'graphql/client';
 
-import { useState } from 'react';
-import { NextSeo } from 'next-seo';
-import { IFrontMatterPost } from 'types';
 import { GetStaticProps } from 'next';
-import { getPosts } from 'services/getStaticFiles';
+import { GET_POSTS } from 'graphql/queries';
+import { GetPostsQuery } from 'graphql/generated/graphql';
+import { NextSeo } from 'next-seo';
+import { useState } from 'react';
+import { format, parseISO } from 'date-fns';
 
 import Layout from 'layouts/main';
 
 import Post from 'components/Post';
 import Footer from 'components/Footer';
+
+import { staticPosts } from 'content/staticPosts';
 
 import {
   ClockIcon,
@@ -19,14 +23,13 @@ import {
 
 import { Wrapper, BlogHeader, Search, NoPostsFound } from 'styles/content';
 
-interface IBlog {
-  posts: IFrontMatterPost[];
-}
+export default function Blog({ posts }: GetPostsQuery) {
+  const allPosts = [...posts, ...staticPosts];
 
-const Blog = ({ posts }: IBlog) => {
   const [searchValue, setSearchValue] = useState('');
-  const filteredBlogPosts = posts.filter((post) =>
-    post.frontmatter.title.toLowerCase().includes(searchValue.toLowerCase())
+
+  const filteredBlogPosts = allPosts.filter((post) =>
+    post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -53,37 +56,32 @@ const Blog = ({ posts }: IBlog) => {
 
           <div className="mansory">
             {!searchValue &&
-              posts.map(
-                ({
-                  frontmatter: { title, readTime, date, external, url },
-                  slug,
-                }) =>
-                  external ? (
-                    <Post key={slug}>
-                      <a href={url} target="_blank">
-                        <time>{date}</time>
-                        <h3>
-                          {title} <LinkExternalIcon size={16} />
-                        </h3>
+              allPosts.map(({ date, readTime, slug, title }) =>
+                slug.startsWith('https://') ? (
+                  <Post key={slug}>
+                    <a href={slug} target="_blank">
+                      <time>{date}</time>
+                      <h3>
+                        {title} <LinkExternalIcon size={16} />
+                      </h3>
+                      <span>
+                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                      </span>
+                    </a>
+                  </Post>
+                ) : (
+                  <Post key={slug}>
+                    <Link href={'/post/[slug]'} as={`/post/${slug}`}>
+                      <a>
+                        <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                        <h3>{title}</h3>
                         <span>
                           <ClockIcon size={16} /> {readTime} minutos de leitura
                         </span>
                       </a>
-                    </Post>
-                  ) : (
-                    <Post key={slug}>
-                      <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                        <a>
-                          <time>{date}</time>
-                          <h3>{title}</h3>
-                          <span>
-                            <ClockIcon size={16} /> {readTime} minutos de
-                            leitura
-                          </span>
-                        </a>
-                      </Link>
-                    </Post>
-                  )
+                    </Link>
+                  </Post>
+                )
               )}
 
             {!filteredBlogPosts.length && (
@@ -91,29 +89,27 @@ const Blog = ({ posts }: IBlog) => {
             )}
 
             {searchValue &&
-              filteredBlogPosts.map((post) =>
-                post.frontmatter.external ? (
-                  <Post key={post.slug}>
-                    <a href={post.frontmatter.url} target="_blank">
-                      <time>{post.frontmatter.date}</time>
+              filteredBlogPosts.map(({ date, readTime, slug, title }) =>
+                slug.startsWith('https://') ? (
+                  <Post key={slug}>
+                    <a href={slug} target="_blank">
+                      <time>{date}</time>
                       <h3>
-                        {post.frontmatter.title} <LinkExternalIcon size={16} />
+                        {title} <LinkExternalIcon size={16} />
                       </h3>
                       <span>
-                        <ClockIcon size={16} /> {post.frontmatter.readTime}{' '}
-                        minutos de leitura
+                        <ClockIcon size={16} /> {readTime} minutos de leitura
                       </span>
                     </a>
                   </Post>
                 ) : (
-                  <Post key={post.slug}>
-                    <Link href={'/post/[slug]'} as={`/post/${post.slug}`}>
+                  <Post key={slug}>
+                    <Link href={'/post/[slug]'} as={`/post/${slug}`}>
                       <a>
-                        <time>{post.frontmatter.date}</time>
-                        <h3>{post.frontmatter.title}</h3>
+                        <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                        <h3>{title}</h3>
                         <span>
-                          <ClockIcon size={16} /> {post.frontmatter.readTime}{' '}
-                          minutos de leitura
+                          <ClockIcon size={16} /> {readTime} minutos de leitura
                         </span>
                       </a>
                     </Link>
@@ -127,10 +123,16 @@ const Blog = ({ posts }: IBlog) => {
       </Layout>
     </>
   );
-};
+}
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getPosts();
+  const { posts } = await client.request<GetPostsQuery>(GET_POSTS, {
+    first: 50,
+  });
+
+  if (!posts) {
+    return { notFound: true };
+  }
 
   return {
     props: {
@@ -138,5 +140,3 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-export default Blog;

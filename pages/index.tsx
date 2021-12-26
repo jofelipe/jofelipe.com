@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import client from 'graphql/client';
 
 import { GetStaticProps } from 'next';
-import { IFrontMatterPost } from 'types';
+import { GET_POSTS } from 'graphql/queries';
+import { GetPostsQuery } from 'graphql/generated/graphql';
 import { NextSeo } from 'next-seo';
-import { getPosts } from 'services/getStaticFiles';
+import { format, parseISO } from 'date-fns';
 
 import Layout from 'layouts/main';
 
 import Linkedin from 'components/svg/linkedin';
 import GitHub from 'components/svg/github';
-import Peakseekers from 'components/svg/peakseekers';
+import Spotify from 'components/svg/spotify';
 import FlightRadar from 'components/svg/flightradar';
 import Post from 'components/Post';
 import Project from 'components/Project';
@@ -29,11 +31,7 @@ import {
   Now,
 } from 'styles/index';
 
-interface IHome {
-  posts: IFrontMatterPost[];
-}
-
-const Home = ({ posts }: IHome) => {
+export default function Home({ posts }: GetPostsQuery) {
   return (
     <>
       <NextSeo title="Página inicial" />
@@ -48,7 +46,7 @@ const Home = ({ posts }: IHome) => {
               </h1>
               <p>
                 Meu objetivo atualmente é desenvolver novos produtos que
-                impactam milhões de pessoas no Brasil através da{' '}
+                impactam milhares de pessoas no Brasil através da{' '}
                 <a
                   href="https://www.fitcard.com.br/"
                   target="_blank"
@@ -66,16 +64,6 @@ const Home = ({ posts }: IHome) => {
               <p>Minha stack atualmente consiste em:</p>
 
               <ul className="current-stack">
-                <li>
-                  <img src="/assets/svg/figma.svg" alt="Figma" title="Figma" />
-                </li>
-                <li>
-                  <img
-                    src="/assets/svg/net-core.svg"
-                    alt=".NET Core"
-                    title=".NET Core"
-                  />
-                </li>
                 <li>
                   <img
                     src="/assets/svg/react-react-native.svg"
@@ -95,6 +83,20 @@ const Home = ({ posts }: IHome) => {
                     src="/assets/svg/typescript.svg"
                     alt="TypeScript"
                     title="TypeScript"
+                  />
+                </li>
+                <li>
+                  <img
+                    src="/assets/svg/net-core.svg"
+                    alt=".NET Core"
+                    title=".NET Core"
+                  />
+                </li>
+                <li>
+                  <img
+                    src="/assets/svg/graph-ql.svg"
+                    alt="GraphQL"
+                    title="GraphQL"
                   />
                 </li>
               </ul>
@@ -130,22 +132,22 @@ const Home = ({ posts }: IHome) => {
                   </li>
                   <li>
                     <a
-                      href="https://peakseekers.app/jow"
-                      title="Peakseekers"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Peakseekers />
-                    </a>
-                  </li>
-                  <li>
-                    <a
                       href="https://my.flightradar24.com/jofelipe"
                       title="myFlightradar24"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <FlightRadar />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://open.spotify.com/user/1244967657?si=08a3ac3771384320"
+                      title="Spotify"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Spotify />
                     </a>
                   </li>
                 </ul>
@@ -166,41 +168,19 @@ const Home = ({ posts }: IHome) => {
               <h2>Últimos posts</h2>
 
               <div className="mansory">
-                {posts
-                  .slice(0, 6)
-                  .map(
-                    ({
-                      frontmatter: { title, readTime, date, external, url },
-                      slug,
-                    }) =>
-                      external ? (
-                        <Post key={slug}>
-                          <a href={url} target="_blank">
-                            <time>{date}</time>
-                            <h3>
-                              {title} <LinkExternalIcon size={16} />
-                            </h3>
-                            <span>
-                              <ClockIcon size={16} /> {readTime} minutos de
-                              leitura
-                            </span>
-                          </a>
-                        </Post>
-                      ) : (
-                        <Post key={slug}>
-                          <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                            <a>
-                              <time>{date}</time>
-                              <h3>{title}</h3>
-                              <span>
-                                <ClockIcon size={16} /> {readTime} minutos de
-                                leitura
-                              </span>
-                            </a>
-                          </Link>
-                        </Post>
-                      )
-                  )}
+                {posts.map(({ slug, title, date, readTime }) => (
+                  <Post key={slug}>
+                    <Link href={'/post/[slug]'} as={`/post/${slug}`}>
+                      <a>
+                        <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                        <h3>{title}</h3>
+                        <span>
+                          <ClockIcon size={16} /> {readTime} minutos de leitura
+                        </span>
+                      </a>
+                    </Link>
+                  </Post>
+                ))}
               </div>
             </LatestPosts>
 
@@ -231,28 +211,28 @@ const Home = ({ posts }: IHome) => {
               <h4>Agora</h4>
               <p>
                 Extremamente curioso, passo meu tempo livre buscando aprender
-                mais sobre meus hobbies atuais: Astronomia e Baixo 🎸
+                mais sobre meus hobbies atuais: Astronomia e Fotografia.
               </p>
               <p>
                 Fora da internet, busco me conectar a natureza através do
-                ciclismo e uma das minhas maiores paixões: montanhismo.
+                Ciclismo e uma das minhas maiores paixões: Montanhismo.
               </p>
               <p>
                 O que fiz nos últimos meses? Escutei muito{' '}
-                <a
-                  href="https://open.spotify.com/artist/1Ffb6ejR6Fe5IamqA5oRUF"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Bring Me The Horizon
-                </a>{' '}
-                e{' '}
                 <a
                   href="https://open.spotify.com/artist/7c8kQb9AUntvapfnuC3IhF"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Terno Rei
+                </a>{' '}
+                e{' '}
+                <a
+                  href="https://open.spotify.com/artist/1nVq0hKIVReeaiB3xJgKf0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Molchat Doma
                 </a>
                 , estudei muito sobre Desenvolvimento Web através dos canais do{' '}
                 <a
@@ -270,7 +250,7 @@ const Home = ({ posts }: IHome) => {
                 >
                   Dev Soutinho
                 </a>
-                , me atualizei através das newsletters da{' '}
+                , me atualizei através das newsletters{' '}
                 <a
                   href="https://medium.com/startup-da-real/"
                   target="_blank"
@@ -286,8 +266,7 @@ const Home = ({ posts }: IHome) => {
                 >
                   Manual do Usuário
                 </a>
-                , e por fim, li muito sobre Astronomia, Finanças e biografias em
-                geral.
+                , e por fim, li muito sobre Criatividade, Filosofia e Política.
               </p>
               <p>
                 E é isso. Caso queira falar um “oi”, me encontre em{' '}
@@ -301,10 +280,16 @@ const Home = ({ posts }: IHome) => {
       </Layout>
     </>
   );
-};
+}
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getPosts();
+  const { posts } = await client.request<GetPostsQuery>(GET_POSTS, {
+    first: 6,
+  });
+
+  if (!posts) {
+    return { notFound: true };
+  }
 
   return {
     props: {
@@ -312,5 +297,3 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-export default Home;
