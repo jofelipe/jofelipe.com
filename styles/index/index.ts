@@ -184,8 +184,8 @@ export const PhotoSocial = styled.div`
   position: relative;
   ${marginBottomHome};
 
-  div:nth-child(2) {
-    margin: 81px 0 0 auto;
+  span:nth-child(2) {
+    margin: 81px 0 0 auto !important;
   }
 
   &:before {
@@ -211,16 +211,16 @@ export const PhotoSocial = styled.div`
   }
 
   @media (max-width: 1400px) {
-    div:nth-child(2) {
-      margin-top: 161px;
+    span:nth-child(2) {
+      margin-top: 161px !important;
       width: 184px !important;
       height: 184px !important;
     }
   }
 
   @media (max-width: 1140px) {
-    div:nth-child(2) {
-      margin-top: 81px;
+    span:nth-child(2) {
+      margin-top: 81px !important;
       position: absolute !important;
       top: 0;
       right: 0;
