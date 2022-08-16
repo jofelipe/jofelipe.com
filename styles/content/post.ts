@@ -56,6 +56,12 @@ export const Content = styled.div<IContent>`
     margin-bottom: 24px;
   }
 
+  h4 {
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 8px;
+  }
+
   h5 {
     color: ${(props) => props.theme.colors.textSecondary};
     font-size: 20px;
@@ -107,6 +113,13 @@ export const Content = styled.div<IContent>`
         }
       }
     }
+  }
+
+  blockquote {
+    border-left: 4px solid;
+    padding-left: 24px;
+    margin: 0 0 24px;
+    font-style: italic;
   }
 
   .margin {
@@ -187,6 +200,11 @@ export const Content = styled.div<IContent>`
       line-height: 28px;
     }
 
+    h4 {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
     .btn-back {
       margin-right: 16px;
 
@@ -264,7 +282,11 @@ export const FeaturedImage = styled.div`
 `;
 
 export const Comments = styled.div`
-  padding-top: 32px;
+  padding-top: 48px;
+
+  @media (max-width: 767px) {
+    padding-top: 32px;
+  }
 `;
 
 export const BackToTop = styled.button`

@@ -39,13 +39,15 @@ const Header: FC<IHeader> = ({ isStatic }) => {
                 <a>Blog</a>
               </Link>
             </li>
-            <li className={router.pathname === '/setup' ? 'active' : ''}>
-              <Link href="/setup">
-                <a>Setup</a>
-              </Link>
-            </li>
             <li>
-              <a href="https://trips.jofelipe.com/">Trips</a>
+              <a
+                href="https://trips.jofelipe.com/"
+                title="Trips"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Trips
+              </a>
             </li>
           </ul>
         </Menu>

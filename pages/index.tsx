@@ -228,35 +228,27 @@ export default function Home({ posts }: GetPostsQuery) {
                 </a>{' '}
                 e{' '}
                 <a
-                  href="https://open.spotify.com/artist/1nVq0hKIVReeaiB3xJgKf0"
+                  href="https://open.spotify.com/artist/246dkjvS1zLTtiykXe5h60"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Molchat Doma
+                  Post Malone
                 </a>
-                , estudei muito sobre Desenvolvimento Web através dos canais do{' '}
+                , estudei muito sobre UI/UX através de artigos do{' '}
                 <a
-                  href="https://www.youtube.com/user/willjusten"
+                  href="https://www.nngroup.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Willian Justen
-                </a>{' '}
-                e{' '}
-                <a
-                  href="https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Dev Soutinho
+                  Nielsen Norman Group
                 </a>
                 , me atualizei através das newsletters{' '}
                 <a
-                  href="https://medium.com/startup-da-real/"
+                  href="https://uilab.com.br/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Startup da Real
+                  UI Lab News
                 </a>{' '}
                 e{' '}
                 <a
@@ -266,11 +258,18 @@ export default function Home({ posts }: GetPostsQuery) {
                 >
                   Manual do Usuário
                 </a>
-                , e por fim, li muito sobre Criatividade, Filosofia e Política.
+                , e por fim, li muito sobre Criatividade, Design e Política.
               </p>
               <p>
-                E é isso. Caso queira falar um “oi”, me encontre em{' '}
-                <a href="mailto:hi@jofelipe.com">hi@jofelipe.com</a>
+                E é isso. Caso queira falar um “oi”, me encontre no{' '}
+                <a
+                  href="https://linkedin.com/in/jofelipe"
+                  title="Linkedin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Linkedin
+                </a>
               </p>
             </Now>
 
