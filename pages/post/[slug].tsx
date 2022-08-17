@@ -82,7 +82,7 @@ export default function Post({ post }: GetPostBySlugQuery) {
           },
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}${openGraphImage.url}`,
+              url: openGraphImage.url,
               width: 1200,
               height: 1200,
               alt: title,
@@ -94,7 +94,7 @@ export default function Post({ post }: GetPostBySlugQuery) {
       <ArticleJsonLd
         url={`${process.env.NEXT_PUBLIC_URL}/post/${slug}`}
         title={title}
-        images={[`${process.env.NEXT_PUBLIC_URL}${openGraphImage.url}`]}
+        images={[`${openGraphImage.url}`]}
         datePublished={date}
         authorName={['Jonathan Felipe']}
         publisherName="Jonathan Felipe"
@@ -127,7 +127,7 @@ export default function Post({ post }: GetPostBySlugQuery) {
           </Content>
 
           <FeaturedImage
-            style={{ backgroundImage: `url(${featuredImage.url})` }}
+            style={{ backgroundImage: `url(${featuredImage.url})`, backgroundPosition: 'center', backgroundSize: 'cover', height: 480, marginBottom: 64 }}
           />
 
           <Content>

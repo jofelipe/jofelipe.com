@@ -265,19 +265,13 @@ export const PostInfo = styled.div`
 `;
 
 export const FeaturedImage = styled.div`
-  background-color: #fff;
-  background-position: center;
-  background-size: cover;
-  height: 480px;
-  margin-bottom: 64px;
-
   @media (max-width: 960px) {
-    height: 320px;
-    margin-bottom: 48px;
+    height: 320px !important;
+    margin-bottom: 48px !important;
   }
 
   @media (max-width: 767px) {
-    margin-bottom: 32px;
+    margin-bottom: 32px !important;
   }
 `;
 
