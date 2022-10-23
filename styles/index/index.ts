@@ -4,7 +4,7 @@ import { shade } from 'polished';
 const titleHome = css`
   color: ${(props) => props.theme.colors.primary};
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 32px;
 
   @media (max-width: 1140px) {
@@ -81,7 +81,7 @@ export const TextHome = styled.article`
     color: ${(props) => props.theme.colors.primary};
     font-size: 64px;
     line-height: 74px;
-    font-weight: 900;
+    font-weight: 700;
     margin: 0 0 24px;
   }
 

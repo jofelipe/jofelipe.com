@@ -33,6 +33,7 @@ export const Wrapper = styled.article`
     margin: 24px 0;
 
     svg {
+      color: ${props => props.theme.colors.primary};
       vertical-align: middle !important;
     }
   }

@@ -269,7 +269,7 @@ export default function Home({ posts }: GetPostsQuery) {
                   rel="noopener noreferrer"
                 >
                   Linkedin
-                </a>
+                </a>.
               </p>
             </Now>
 

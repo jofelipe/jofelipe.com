@@ -28,7 +28,8 @@ export const Wrapper = styled.header<IHeader>`
   .logo {
     color: #fff;
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 700;
+    letter-spacing: -0.4px;
     text-transform: uppercase;
   }
 

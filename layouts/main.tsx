@@ -16,7 +16,7 @@ const Main: FC<ILayout> = ({ headerStatic, children }) => {
     <>
       <GlobalStyle />
 
-      <GoogleFonts href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" />
+      <GoogleFonts href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;700&display=swap" />
 
       <Header isStatic={headerStatic} />
 

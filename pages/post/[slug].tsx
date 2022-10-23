@@ -11,7 +11,6 @@ import { format, parseISO } from 'date-fns';
 import Layout from 'layouts/main';
 
 import ReactMarkdown from 'components/ReactMarkdown';
-import Disqus from 'components/Disqus';
 import Footer from 'components/Footer';
 
 import {
@@ -26,7 +25,6 @@ import {
   Content,
   PostInfo,
   FeaturedImage,
-  Comments,
   BackToTop,
 } from 'styles/content/post';
 
@@ -127,22 +125,12 @@ export default function Post({ post }: GetPostBySlugQuery) {
           </Content>
 
           <FeaturedImage
-            style={{ backgroundImage: `url(${featuredImage.url})`, backgroundPosition: 'center', backgroundSize: 'cover', height: 480, marginBottom: 64 }}
+            style={{ backgroundImage: `url(${featuredImage.url})` }}
           />
 
           <Content>
             <ReactMarkdown content={content} />
           </Content>
-
-          <Comments>
-            <Content>
-              <Disqus
-                id={title}
-                title={title}
-                url={`${process.env.NEXT_PUBLIC_URL}/post/${slug}`}
-              />
-            </Content>
-          </Comments>
         </Wrapper>
 
         <BackToTop

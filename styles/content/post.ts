@@ -39,14 +39,14 @@ export const Content = styled.div<IContent>`
     color: ${(props) => props.theme.colors.primary};
     font-size: 48px;
     line-height: 58px;
-    font-weight: 900;
+    font-weight: 700;
   }
 
   h2 {
     font-size: 36px;
     line-height: 46px;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   h3 {
@@ -59,7 +59,7 @@ export const Content = styled.div<IContent>`
   h4 {
     font-size: 18px;
     line-height: 28px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   h5 {
@@ -74,7 +74,7 @@ export const Content = styled.div<IContent>`
   p {
     font-size: 20px;
     line-height: 32px;
-    margin: 0 0 24px;
+    margin: 0 0 32px;
 
     &:last-of-type:not(.margin) {
       margin-bottom: 0;
@@ -94,7 +94,7 @@ export const Content = styled.div<IContent>`
   }
 
   ul {
-    margin: 0 0 24px;
+    margin: 0 0 32px;
 
     li {
       font-size: 20px;
@@ -118,16 +118,16 @@ export const Content = styled.div<IContent>`
   blockquote {
     border-left: 4px solid;
     padding-left: 24px;
-    margin: 0 0 24px;
+    margin: 0 0 32px;
     font-style: italic;
   }
 
   .margin {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   ol {
-    margin: 0 0 24px;
+    margin: 0 0 32px;
 
     li {
       font-size: 20px;
@@ -150,7 +150,7 @@ export const Content = styled.div<IContent>`
 
   img {
     display: block;
-    margin: 0 auto 24px;
+    margin: 0 auto 32px;
     max-width: 100%;
     height: auto;
   }
@@ -225,7 +225,7 @@ export const PostInfo = styled.div`
 
   div {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
   }
 
   svg {
@@ -265,13 +265,18 @@ export const PostInfo = styled.div`
 `;
 
 export const FeaturedImage = styled.div`
+  background-position: center;
+  background-size: cover;
+  height: 480px;
+  margin-bottom: 64px;
+
   @media (max-width: 960px) {
-    height: 320px !important;
-    margin-bottom: 48px !important;
+    height: 320px;
+    margin-bottom: 48px;
   }
 
   @media (max-width: 767px) {
-    margin-bottom: 32px !important;
+    margin-bottom: 32px;
   }
 `;
 

@@ -8,7 +8,7 @@ export const Wrapper = styled.section`
   h1 {
     color: ${(props) => props.theme.colors.primary};
     font-size: 48px;
-    font-weight: 900;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 64px;
   }
