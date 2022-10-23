@@ -174,6 +174,12 @@ export const Content = styled.section`
   @media (max-width: 960px) {
     padding: 0 32px;
   }
+
+  @media (max-width: 767px) {
+    footer {
+      padding: 0 0 32px;
+    }
+  }
 `;
 
 export const PhotoSocial = styled.div`
