@@ -236,7 +236,7 @@ export const PhotoSocial = styled.div`
     width: auto;
     margin: 0 -32px 64px;
 
-    div:nth-child(2) {
+    span:nth-child(2) {
       right: auto;
       left: 184px;
     }

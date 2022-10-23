@@ -225,11 +225,13 @@ export const PostInfo = styled.div`
 
   div {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
   }
 
   svg {
     margin-right: 8px;
+    position: relative;
+    top: -1px;
   }
 
   .post-date {
