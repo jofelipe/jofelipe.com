@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 interface IContent {
   isPage?: boolean;
@@ -10,6 +11,64 @@ export const Wrapper = styled.article`
   @media (max-width: 767px) {
     padding-top: 16px;
     margin-bottom: 48px;
+  }
+`;
+
+export const Navigation = styled.nav`
+  background: ${(props) => props.theme.colors.card};
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  ul {
+    display: flex;
+    max-width: 780px;
+    margin: 0 auto;
+
+    li {
+      list-style: none;
+      width: 33.3%;
+    }
+  }
+
+  button {
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${(props) => props.theme.colors.text};
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 24px 32px;
+    width: 100%;
+    transition: all 0.1s linear;
+
+    &.active {
+      background: ${(props) => shade(0.15, props.theme.colors.card)};
+    }
+
+    svg {
+      margin-right: 8px;
+    }
+  }
+
+  @media (min-width: 960px) {
+    button {
+      &:hover {
+        background: ${(props) => shade(0.15, props.theme.colors.card)};
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    button {
+      padding: 16px 24px;
+
+      svg {
+        display: none !important;
+      }
+    }
   }
 `;
 
@@ -155,6 +214,50 @@ export const Content = styled.div<IContent>`
     height: auto;
   }
 
+  .title {
+    margin-bottom: 32px;
+    width: min-content;
+    padding-top: 64px;
+
+    .bg {
+      background: ${(props) => props.theme.colors.card};
+      border-left: 8px solid ${(props) => props.theme.colors.primary};
+      display: flex;
+      align-items: center;
+      padding: 8px 16px;
+    }
+
+    svg {
+      margin-right: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      margin-bottom: 0;
+    }
+  }
+
+  .text-content {
+    margin-bottom: 64px;
+  }
+
+  &.project-page img {
+    max-width: none;
+    margin: 48px auto 48px 50%;
+    transform: translateX(-50%);
+    image-rendering: pixelated;
+  }
+
+  @media (max-width: 1600px) {
+    &.project-page img {
+      max-width: 85vw;
+      image-rendering: initial;
+    }
+  }
+
   @media (max-width: 1140px) {
     p,
     ul li,
@@ -212,6 +315,19 @@ export const Content = styled.div<IContent>`
         width: 24px;
       }
     }
+
+    .title {
+      padding-top: 32px;
+
+      .bg {
+        border-left-width: 4px;
+      }
+    }
+
+    &.project-page img {
+      margin-bottom: 32px;
+      margin-top: 32px;
+    }
   }
 `;
 
@@ -226,25 +342,25 @@ export const PostInfo = styled.div`
   div {
     display: flex;
     align-items: center;
+
+    &:not(:last-child) {
+      margin-right: 32px;
+
+      &:after {
+        content: '.';
+        font-size: 20px;
+        font-weight: 900;
+        padding-left: 32px;
+        position: relative;
+        top: -5px;
+      }
+    }
   }
 
   svg {
     margin-right: 8px;
     position: relative;
     top: -1px;
-  }
-
-  .post-date {
-    margin-right: 32px;
-
-    &:after {
-      content: '.';
-      font-size: 20px;
-      font-weight: 900;
-      padding-left: 32px;
-      position: relative;
-      top: -5px;
-    }
   }
 
   @media (max-width: 767px) {
@@ -256,11 +372,13 @@ export const PostInfo = styled.div`
       width: 16px;
     }
 
-    .post-date {
-      margin: 0 0 8px;
+    div {
+      &:not(:last-child) {
+        margin: 0 0 8px;
 
-      &:after {
-        content: none;
+        &:after {
+          content: none;
+        }
       }
     }
   }
@@ -282,6 +400,57 @@ export const FeaturedImage = styled.div`
   }
 `;
 
+export const Pagination = styled.div`
+  opacity: 0;
+  transition: all 0.5s linear;
+  visibility: hidden;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  & > div {
+    position: fixed;
+    top: 50%;
+  }
+
+  a {
+    background: ${(props) => props.theme.colors.card};
+    display: block;
+    padding: 16px 24px;
+    transition: all 0.1s linear;
+
+    &:hover {
+      background: ${(props) => shade(0.15, props.theme.colors.card)};
+    }
+  }
+
+  .previous {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+
+  @media (max-width: 1140px) {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+
+    & > div {
+      position: static;
+    }
+  }
+
+  @media (max-width: 480px) {
+    a {
+      padding: 8px 16px;
+    }
+  }
+`;
+
 export const Comments = styled.div`
   padding-top: 48px;
 
@@ -298,6 +467,12 @@ export const BackToTop = styled.button`
   position: fixed;
   right: 16px;
   bottom: 24px;
+  opacity: 0;
+  transition: all 0.2s linear;
+
+  &.active {
+    opacity: 1;
+  }
 
   &:focus {
     outline: 0;

@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import GoogleFonts from 'next-google-fonts';
-
 import Header from 'components/Header';
 
 import 'normalize.css';
@@ -15,8 +13,6 @@ const Main: FC<ILayout> = ({ headerStatic, children }) => {
   return (
     <>
       <GlobalStyle />
-
-      <GoogleFonts href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;700&display=swap" />
 
       <Header isStatic={headerStatic} />
 

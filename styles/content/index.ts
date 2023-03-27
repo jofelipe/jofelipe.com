@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Wrapper = styled.section`
-  padding: 0 64px;
   overflow: hidden;
 
   h1 {
@@ -13,12 +12,16 @@ export const Wrapper = styled.section`
     margin-bottom: 64px;
   }
 
-  .mansory {
+  .masonry {
     margin-bottom: 64px;
 
     &:hover a {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 1600px) {
+    padding: 0 64px;
   }
 
   @media (max-width: 1140px) {
@@ -33,7 +36,7 @@ export const Wrapper = styled.section`
       margin-bottom: 32px;
     }
 
-    .mansory {
+    .masonry {
       margin-bottom: 48px;
     }
   }

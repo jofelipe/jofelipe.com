@@ -17,15 +17,19 @@ const Header: FC<IHeader> = ({ isStatic }) => {
     <Wrapper isStatic={isStatic}>
       <div className="alignment">
         <Link href="/">
-          <a className="logo">Jonathan Felipe</a>
+          <span className="logo">Jonathan Felipe</span>
         </Link>
 
         <Menu isOpen={openMenu}>
           <ul>
             <li className={router.pathname === '/' ? 'active' : ''}>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
+              <Link href="/">Home</Link>
+            </li>
+            <li className={router.pathname === '/sobre' ? 'active' : ''}>
+              <Link href="/sobre">Sobre</Link>
+            </li>
+            <li className={router.pathname.includes('projeto') ? 'active' : ''}>
+              <Link href="/projetos">Projetos</Link>
             </li>
             <li
               className={
@@ -35,25 +39,14 @@ const Header: FC<IHeader> = ({ isStatic }) => {
                   : ''
               }
             >
-              <Link href="/blog">
-                <a>Blog</a>
-              </Link>
-            </li>
-            <li>
-              <a
-                href="https://trips.jofelipe.com/"
-                title="Trips"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Trips
-              </a>
+              <Link href="/blog">Blog</Link>
             </li>
           </ul>
         </Menu>
       </div>
 
       <MobileMenu isOpen={openMenu} onClick={() => setOpenMenu(!openMenu)}>
+        <span className="fill" />
         <span className="fill" />
         <span className="fill" />
       </MobileMenu>

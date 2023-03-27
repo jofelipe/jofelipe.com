@@ -31,8 +31,8 @@ const Footer = () => {
                 src={data.albumImageUrl}
                 width={64}
                 height={64}
-                layout="fixed"
                 loading="eager"
+                alt={data.artist}
               />
             </div>
           )}

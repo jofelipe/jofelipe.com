@@ -151,16 +151,17 @@ export const MobileMenu = styled.button<IMenu>`
     background: #fff;
     height: 3px;
     display: block;
-    border-radius: 3px;
     transition: all 0.1s linear;
+    width: 75%;
+    margin-left: 25%;
 
-    &:first-child {
-      width: 75%;
-      margin-left: 25%;
+    &:nth-child(2) {
+      width: 100%;
+      margin-left: 0;
     }
 
     &:not(:last-child) {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
   }
 
@@ -174,6 +175,7 @@ export const MobileMenu = styled.button<IMenu>`
       position: fixed;
       top: 32px;
       right: 32px;
+      padding-top: 10px;
 
       .fill {
         &:first-child {
@@ -182,9 +184,14 @@ export const MobileMenu = styled.button<IMenu>`
           transform: rotate(-45deg);
         }
 
+        &:nth-child(2) {
+          display: none;
+        }
+
         &:last-child {
           transform: rotate(45deg);
-          margin-top: -8px;
+          margin: -7px 0 0 0;
+          width: 100%;
         }
       }
     `}

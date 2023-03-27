@@ -1,8 +1,14 @@
 import { AppProps } from 'next/app';
+import { Archivo } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 
 import theme from 'styles/theme';
+
+const archivo = Archivo({
+  weight: ['300', '400', '700'],
+  subsets: ['latin'],
+});
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
       <DefaultSeo
         title="Jonathan Felipe"
         titleTemplate="%s - Jonathan Felipe"
-        description="Site pessoal do Desenvolvedor Front-end Jonathan Felipe. Um espaço para divulgação de seus projetos e posts relacionados ao seu trabalho."
+        description="Site pessoal de Jonathan Felipe, UI Designer. Um espaço para divulgação de seus projetos e posts relacionados ao seu trabalho."
         openGraph={{
           type: 'website',
           locale: 'pt_BR',
@@ -24,7 +30,10 @@ function App({ Component, pageProps }: AppProps) {
           ],
         }}
       />
-      <Component {...pageProps} />
+
+      <div className={archivo.className}>
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   );
 }

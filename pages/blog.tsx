@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Masonry from 'react-masonry-css';
 import client from 'graphql/client';
 
 import { GetStaticProps } from 'next';
@@ -7,6 +8,7 @@ import { GetPostsQuery } from 'graphql/generated/graphql';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { format, parseISO } from 'date-fns';
+import { masonryColumns } from 'utils';
 
 import Layout from 'layouts/main';
 
@@ -41,7 +43,8 @@ export default function Blog({ posts }: GetPostsQuery) {
           <BlogHeader>
             <h1>Blog</h1>
             <p>
-              Aqui escrevo sobre meus hobbies, viagens e o mundo front-end 😊
+              Aqui compartilho com vocês minhas paixões, viagens e o universo
+              web 😊
             </p>
           </BlogHeader>
 
@@ -54,7 +57,11 @@ export default function Blog({ posts }: GetPostsQuery) {
             />
           </Search>
 
-          <div className="mansory">
+          <Masonry
+            breakpointCols={masonryColumns}
+            className="masonry"
+            columnClassName="masonry-column"
+          >
             {!searchValue &&
               allPosts.map(({ date, readTime, slug, title }) =>
                 slug.startsWith('https://') ? (
@@ -72,13 +79,11 @@ export default function Blog({ posts }: GetPostsQuery) {
                 ) : (
                   <Post key={slug}>
                     <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                      <a>
-                        <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
-                        <h3>{title}</h3>
-                        <span>
-                          <ClockIcon size={16} /> {readTime} minutos de leitura
-                        </span>
-                      </a>
+                      <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                      <h3>{title}</h3>
+                      <span>
+                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                      </span>
                     </Link>
                   </Post>
                 )
@@ -105,18 +110,16 @@ export default function Blog({ posts }: GetPostsQuery) {
                 ) : (
                   <Post key={slug}>
                     <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                      <a>
-                        <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
-                        <h3>{title}</h3>
-                        <span>
-                          <ClockIcon size={16} /> {readTime} minutos de leitura
-                        </span>
-                      </a>
+                      <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                      <h3>{title}</h3>
+                      <span>
+                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                      </span>
                     </Link>
                   </Post>
                 )
               )}
-          </div>
+          </Masonry>
         </Wrapper>
 
         <Footer />

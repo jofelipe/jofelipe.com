@@ -73,8 +73,27 @@ export const TextHome = styled.article`
     }
 
     &:last-of-type {
-      margin-bottom: 24px;
+      margin-bottom: 48px;
     }
+  }
+
+  .wave-animation {
+    animation-name: wave-animation;
+    animation-duration: 3s;
+    animation-iteration-count: 3;
+    transform-origin: 70% 70%;
+    display: inline-block;
+  }
+
+  @keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+    15% { transform: rotate(14.0deg) }
+    30% { transform: rotate(-8.0deg) }
+    40% { transform: rotate(14.0deg) }
+    50% { transform: rotate(-4.0deg) }
+    60% { transform: rotate(10.0deg) }
+    70% { transform: rotate( 0.0deg) }
+   100% { transform: rotate( 0.0deg) }
   }
 
   h1 {
@@ -83,18 +102,6 @@ export const TextHome = styled.article`
     line-height: 74px;
     font-weight: 700;
     margin: 0 0 24px;
-  }
-
-  .current-stack {
-    display: flex;
-
-    li {
-      list-style: none;
-
-      &:not(:last-child) {
-        margin-right: 24px;
-      }
-    }
   }
 
   @media (min-width: 1900px) {
@@ -138,24 +145,6 @@ export const TextHome = styled.article`
       font-size: 40px;
       line-height: 50px;
     }
-
-    .current-stack {
-      display: flex;
-
-      li {
-        list-style: none;
-        width: 40px;
-
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-
-        &:not(:last-child) {
-          margin-right: 16px;
-        }
-      }
-    }
   }
 `;
 
@@ -190,7 +179,7 @@ export const PhotoSocial = styled.div`
   position: relative;
   ${marginBottomHome};
 
-  span:nth-child(2) {
+  img {
     margin: 81px 0 0 auto !important;
   }
 
@@ -217,7 +206,7 @@ export const PhotoSocial = styled.div`
   }
 
   @media (max-width: 1400px) {
-    span:nth-child(2) {
+    img {
       margin-top: 161px !important;
       width: 184px !important;
       height: 184px !important;
@@ -225,7 +214,7 @@ export const PhotoSocial = styled.div`
   }
 
   @media (max-width: 1140px) {
-    span:nth-child(2) {
+    img {
       margin-top: 81px !important;
       position: absolute !important;
       top: 0;
@@ -242,7 +231,7 @@ export const PhotoSocial = styled.div`
     width: auto;
     margin: 0 -32px 64px;
 
-    span:nth-child(2) {
+    img {
       right: auto;
       left: 184px;
     }
@@ -328,42 +317,5 @@ export const RecentProjects = styled.section`
 
   .hover-effect:hover a {
     opacity: 0.25;
-  }
-`;
-
-export const Now = styled.section`
-  ${marginBottomHome};
-
-  h4 {
-    ${titleHome};
-  }
-
-  p {
-    font-size: 20px;
-    line-height: 32px;
-    margin: 0 0 32px;
-
-    a {
-      color: #fff;
-      border-bottom: 1px dotted #fff;
-      padding-bottom: 2px;
-      transition: all 0.1s linear;
-
-      &:hover {
-        border-bottom-color: ${(props) => props.theme.colors.primary};
-        color: ${(props) => props.theme.colors.primary};
-      }
-    }
-
-    &:last-of-type {
-      margin-bottom: 0;
-    }
-  }
-
-  @media (max-width: 1140px) {
-    p {
-      font-size: 18px;
-      line-height: 28px;
-    }
   }
 `;

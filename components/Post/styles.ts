@@ -2,10 +2,7 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Wrapper = styled.article`
-  display: grid;
-  grid-template-rows: 1fr auto;
   margin-bottom: 8px;
-  break-inside: avoid;
 
   a {
     background: ${(props) => props.theme.colors.card};
@@ -15,7 +12,7 @@ export const Wrapper = styled.article`
     transition: all 0.1s linear;
 
     &:hover {
-      background: ${(props) => shade(0.15, props.theme.colors.card)};
+      background: ${(props) => shade(0.25, props.theme.colors.card)};
     }
   }
 
@@ -33,7 +30,7 @@ export const Wrapper = styled.article`
     margin: 24px 0;
 
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
       vertical-align: middle !important;
     }
   }

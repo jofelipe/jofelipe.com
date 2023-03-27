@@ -114,11 +114,11 @@ export default function Post({ post }: GetPostBySlugQuery) {
               <h1>{title}</h1>
             </header>
             <PostInfo>
-              <div className="post-date">
+              <div className="post-date" title="Data de publicação">
                 <CalendarIcon size={24} />{' '}
                 {format(parseISO(date), 'dd/MM/yyyy')}
               </div>
-              <div className="post-read-time">
+              <div className="post-read-time" title="Tempo de leitura">
                 <ClockIcon size={24} /> {readTime} minutos de leitura
               </div>
             </PostInfo>
@@ -134,9 +134,9 @@ export default function Post({ post }: GetPostBySlugQuery) {
         </Wrapper>
 
         <BackToTop
+          className={showScroll ? 'active': ''}
           onClick={scrollTop}
           title="Voltar para o topo"
-          style={{ display: showScroll ? 'block' : 'none' }}
         >
           <ArrowUpIcon size={32} />
         </BackToTop>

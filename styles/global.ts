@@ -34,22 +34,34 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
-  .mansory {
-    column-count: 2;
-    column-gap: 8px;
-
-    &:hover a {
-      opacity: 0.25;
-    }
-
-    a:hover {
-      opacity: 1;
-    }
+  .masonry {
+    display: flex;
+    margin-left: -8px;
+    width: auto;
   }
 
-  @media (max-width: 767px) {
-    .mansory {
-      column-count: 1;
+  .masonry-column {
+    padding-left: 8px;
+    background-clip: padding-box;
+  }
+
+  @media (min-width: 960px) {
+
+  .text-highlight {
+    display: inline-block;
+    position: relative;
+
+    &:before {
+      background-color: ${(props) => props.theme.colors.primary};
+      content: "";
+      position: absolute;
+      width: calc(100% + 4px);
+      height: 15%;
+      left: -2px;
+      bottom: -2px;
+      z-index: -1;
+      transform: rotate(-1deg);
     }
   }
+  
 `;

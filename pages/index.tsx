@@ -1,24 +1,35 @@
 import Link from 'next/link';
+import Masonry from 'react-masonry-css';
 import Image from 'next/image';
 import client from 'graphql/client';
 
 import { GetStaticProps } from 'next';
-import { GET_POSTS } from 'graphql/queries';
-import { GetPostsQuery } from 'graphql/generated/graphql';
+import { GET_POSTS, GET_PROJECTS } from 'graphql/queries';
+import {
+  GetPostsQuery,
+  GetProjectsQuery,
+  Post as PostType,
+  Projeto as ProjetoType,
+} from 'graphql/generated/graphql';
 import { NextSeo } from 'next-seo';
 import { format, parseISO } from 'date-fns';
+import { masonryColumns } from 'utils';
 
 import Layout from 'layouts/main';
 
+import Button from 'components/Button';
 import Linkedin from 'components/svg/linkedin';
 import GitHub from 'components/svg/github';
 import Spotify from 'components/svg/spotify';
 import FlightRadar from 'components/svg/flightradar';
+import Academia from 'components/svg/academia';
 import Post from 'components/Post';
 import Project from 'components/Project';
 import Footer from 'components/Footer';
 
-import { ClockIcon, ZapIcon, LinkExternalIcon } from '@primer/octicons-react';
+import jonathan from '../assets/jonathan.jpg';
+
+import { ClockIcon, ChecklistIcon } from '@primer/octicons-react';
 
 import {
   Wrapper,
@@ -28,10 +39,14 @@ import {
   Social,
   LatestPosts,
   RecentProjects,
-  Now,
 } from 'styles/index';
 
-export default function Home({ posts }: GetPostsQuery) {
+type Home = {
+  posts: PostType[];
+  projetos: ProjetoType[];
+};
+
+export default function Home({ posts, projetos }: Home) {
   return (
     <>
       <NextSeo title="Página inicial" />
@@ -41,65 +56,28 @@ export default function Home({ posts }: GetPostsQuery) {
           <TextHome>
             <div className="fixed-scroll">
               <h1>
-                UI Designer &amp; <br />
+                UI Designer &amp;
+                <br />
                 Front-end Dev.
               </h1>
               <p>
-                Meu objetivo atualmente é desenvolver novos produtos que
-                impactam milhares de pessoas no Brasil através da{' '}
-                <a
-                  href="https://www.fitcard.com.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Fitcard
-                </a>
-                .
+                Olá, sou o Jonathan <span className="wave-animation">👋🏼</span>
               </p>
               <p>
-                Desde 2012 já participei de mais de 40 projetos para a Web,
-                trabalhando em produtos para grandes empresas como AstraZeneca,
-                Brasil Kirin, ICC Brazil e USP.
+                Com mais de dez anos de experiência em interfaces para Web e
+                Mobile, tenho formação em Análise e Desenvolvimento de Sistemas
+                pela UNIP, e atualmente curso uma especialização em Design
+                Emocional pela Belas Artes.
               </p>
-              <p>Minha stack atualmente consiste em:</p>
-
-              <ul className="current-stack">
-                <li>
-                  <img
-                    src="/assets/svg/react-react-native.svg"
-                    alt="ReactJS"
-                    title="ReactJS"
-                  />
-                </li>
-                <li>
-                  <img
-                    src="/assets/svg/nextjs.svg"
-                    alt="NextJS"
-                    title="NextJS"
-                  />
-                </li>
-                <li>
-                  <img
-                    src="/assets/svg/typescript.svg"
-                    alt="TypeScript"
-                    title="TypeScript"
-                  />
-                </li>
-                <li>
-                  <img
-                    src="/assets/svg/net-core.svg"
-                    alt=".NET Core"
-                    title=".NET Core"
-                  />
-                </li>
-                <li>
-                  <img
-                    src="/assets/svg/graph-ql.svg"
-                    alt="GraphQL"
-                    title="GraphQL"
-                  />
-                </li>
-              </ul>
+              <p>
+                Como UI Designer, meu objetivo é combinar meu conhecimento em
+                Design e minha experiência como Desenvolvedor para criar
+                interfaces acessíveis, altamente funcionais e{' '}
+                <strong className="text-highlight">
+                  esteticamente agradáveis.
+                </strong>
+              </p>
+              <Button href="/sobre">Quero saber mais</Button>
             </div>
           </TextHome>
 
@@ -132,6 +110,16 @@ export default function Home({ posts }: GetPostsQuery) {
                   </li>
                   <li>
                     <a
+                      href="https://belasartes.academia.edu/jofelipe"
+                      title="Academia"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Academia />
+                    </a>
+                  </li>
+                  <li>
+                    <a
                       href="https://my.flightradar24.com/jofelipe"
                       title="myFlightradar24"
                       target="_blank"
@@ -140,138 +128,71 @@ export default function Home({ posts }: GetPostsQuery) {
                       <FlightRadar />
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="https://open.spotify.com/user/1244967657?si=08a3ac3771384320"
-                      title="Spotify"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Spotify />
-                    </a>
-                  </li>
                 </ul>
               </Social>
               <Image
-                src="/assets/img/jonathan.jpg"
+                src={jonathan}
                 alt="Jonathan Felipe"
                 className="photo"
-                layout="fixed"
-                width={275}
-                height={275}
-                quality={100}
-                loading="eager"
+                quality={90}
+                placeholder="blur"
               />
             </PhotoSocial>
-
-            <LatestPosts>
-              <h2>Últimos posts</h2>
-
-              <div className="mansory">
-                {posts.map(({ slug, title, date, readTime }) => (
-                  <Post key={slug}>
-                    <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                      <a>
-                        <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
-                        <h3>{title}</h3>
-                        <span>
-                          <ClockIcon size={16} /> {readTime} minutos de leitura
-                        </span>
-                      </a>
-                    </Link>
-                  </Post>
-                ))}
-              </div>
-            </LatestPosts>
 
             <RecentProjects>
               <h2>Projetos recentes</h2>
 
-              <div className="hover-effect">
-                <Project>
-                  <Link href="/post/criando-uma-rede-social-do-zero">
-                    <a>
-                      <h3>Peakseekers</h3>
-                      <p>
-                        Peakseekers é um aplicativo específico para aventureiros
-                        compartilharem motivações, emoções, dicas e suas
-                        reflexões sobre a relação de humanos com montanhas
-                      </p>
-                      <span>
-                        <ZapIcon size={16} /> UI/UX Design, Desenvolvimento
-                        Front-end &amp; Back-end
-                      </span>
-                    </a>
-                  </Link>
-                </Project>
-              </div>
+              <Masonry
+                breakpointCols={masonryColumns}
+                className="masonry"
+                columnClassName="masonry-column"
+              >
+                {projetos.map(
+                  ({ slug, thumbnail, name, description, role }) => (
+                    <Project key={slug}>
+                      <Link href={'/projeto/[slug]'} as={`/projeto/${slug}`}>
+                        <Image
+                          src={thumbnail.url}
+                          alt={name}
+                          width={480}
+                          height={316}
+                          quality={100}
+                        />
+                        <div className="spacing">
+                          <h3>{name}</h3>
+                          <p>{description}</p>
+                          <span>
+                            <ChecklistIcon size={16} /> {role}
+                          </span>
+                        </div>
+                      </Link>
+                    </Project>
+                  )
+                )}
+              </Masonry>
             </RecentProjects>
 
-            <Now>
-              <h4>Agora</h4>
-              <p>
-                Extremamente curioso, passo meu tempo livre buscando aprender
-                mais sobre meus hobbies atuais: Astronomia e Fotografia.
-              </p>
-              <p>
-                Fora da internet, busco me conectar a natureza através do
-                Ciclismo e uma das minhas maiores paixões: Montanhismo.
-              </p>
-              <p>
-                O que fiz nos últimos meses? Escutei muito{' '}
-                <a
-                  href="https://open.spotify.com/artist/7c8kQb9AUntvapfnuC3IhF"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Terno Rei
-                </a>{' '}
-                e{' '}
-                <a
-                  href="https://open.spotify.com/artist/246dkjvS1zLTtiykXe5h60"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Post Malone
-                </a>
-                , estudei muito sobre UI/UX através de artigos do{' '}
-                <a
-                  href="https://www.nngroup.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Nielsen Norman Group
-                </a>
-                , me atualizei através das newsletters{' '}
-                <a
-                  href="https://uilab.com.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  UI Lab News
-                </a>{' '}
-                e{' '}
-                <a
-                  href="https://manualdousuario.net/acompanhe/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Manual do Usuário
-                </a>
-                , e por fim, li muito sobre Criatividade, Design e Política.
-              </p>
-              <p>
-                E é isso. Caso queira falar um “oi”, me encontre no{' '}
-                <a
-                  href="https://linkedin.com/in/jofelipe"
-                  title="Linkedin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Linkedin
-                </a>.
-              </p>
-            </Now>
+            <LatestPosts>
+              <h2>Posts recentes</h2>
+
+              <Masonry
+                breakpointCols={masonryColumns}
+                className="masonry"
+                columnClassName="masonry-column"
+              >
+                {posts.map(({ slug, date, title, readTime }) => (
+                  <Post key={slug}>
+                    <Link href={'/post/[slug]'} as={`/post/${slug}`}>
+                      <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                      <h3>{title}</h3>
+                      <span>
+                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                      </span>
+                    </Link>
+                  </Post>
+                ))}
+              </Masonry>
+            </LatestPosts>
 
             <Footer />
           </Content>
@@ -286,13 +207,18 @@ export const getStaticProps: GetStaticProps = async () => {
     first: 6,
   });
 
-  if (!posts) {
+  const { projetos } = await client.request<GetProjectsQuery>(GET_PROJECTS, {
+    first: 4,
+  });
+
+  if (!posts || !projetos) {
     return { notFound: true };
   }
 
   return {
     props: {
       posts,
+      projetos,
     },
   };
 };

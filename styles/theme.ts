@@ -4,6 +4,6 @@ export default {
     background: '#222',
     text: '#DDD',
     textSecondary: '#BBB',
-    card: '#333',
+    card: '#444',
   },
 } as const;
