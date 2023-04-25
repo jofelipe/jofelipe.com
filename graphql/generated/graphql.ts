@@ -2163,6 +2163,7 @@ export type Projeto = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
+  intro?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   process: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
@@ -2262,6 +2263,7 @@ export type ProjetoCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   featuredImage: AssetCreateOneInlineInput;
+  intro?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   process: Scalars['String'];
   role: Scalars['String'];
@@ -2383,6 +2385,25 @@ export type ProjetoManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  intro?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  intro_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  intro_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  intro_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  intro_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  intro_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  intro_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  intro_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  intro_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  intro_starts_with?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   name_contains?: InputMaybe<Scalars['String']>;
@@ -2559,6 +2580,8 @@ export enum ProjetoOrderByInput {
   DescriptionDesc = 'description_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  IntroAsc = 'intro_ASC',
+  IntroDesc = 'intro_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   ProcessAsc = 'process_ASC',
@@ -2583,6 +2606,7 @@ export type ProjetoUpdateInput = {
   challenge?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   featuredImage?: InputMaybe<AssetUpdateOneInlineInput>;
+  intro?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   process?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Scalars['String']>;
@@ -2613,6 +2637,7 @@ export type ProjetoUpdateManyInlineInput = {
 export type ProjetoUpdateManyInput = {
   challenge?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
+  intro?: InputMaybe<Scalars['String']>;
   process?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Scalars['String']>;
   solution?: InputMaybe<Scalars['String']>;
@@ -2756,6 +2781,25 @@ export type ProjetoWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  intro?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  intro_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  intro_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  intro_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  intro_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  intro_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  intro_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  intro_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  intro_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  intro_starts_with?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   name_contains?: InputMaybe<Scalars['String']>;
@@ -4781,7 +4825,7 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', title: string, slug: string, date: any, content: string, readTime: number, featuredImage: { __typename?: 'Asset', url: string }, openGraphImage?: { __typename?: 'Asset', url: string } | null | undefined }> };
+export type GetPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', title: string, slug: string, date: any, content: string, readTime: number, createdAt: any, featuredImage: { __typename?: 'Asset', url: string }, openGraphImage?: { __typename?: 'Asset', url: string } | null | undefined }> };
 
 export type GetPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];

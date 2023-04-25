@@ -8,6 +8,7 @@ export const GET_POSTS = gql`
       date
       content
       readTime
+      createdAt
       featuredImage {
         url
       }
@@ -77,6 +78,7 @@ export const GET_PROJECT_BY_SLUG = gql`
       year
       tools
       description
+      intro
       challenge
       process
       solution

@@ -4,6 +4,11 @@ export default createGlobalStyle`
   html, body {
     height: 100%;
   }
+
+  ::selection {
+    background: ${(props) => props.theme.colors.primary};
+    color: #fff;
+  }
   
   body {
     background: #222;
@@ -45,23 +50,34 @@ export default createGlobalStyle`
     background-clip: padding-box;
   }
 
+  .about-photo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 48px;
+  }
+
   @media (min-width: 960px) {
+    .text-highlight {
+      display: inline-block;
+      position: relative;
 
-  .text-highlight {
-    display: inline-block;
-    position: relative;
-
-    &:before {
-      background-color: ${(props) => props.theme.colors.primary};
-      content: "";
-      position: absolute;
-      width: calc(100% + 4px);
-      height: 15%;
-      left: -2px;
-      bottom: -2px;
-      z-index: -1;
-      transform: rotate(-1deg);
+      &:before {
+        background-color: ${(props) => props.theme.colors.primary};
+        content: "";
+        position: absolute;
+        width: calc(100% + 4px);
+        height: 15%;
+        left: -2px;
+        bottom: -2px;
+        z-index: -1;
+        transform: rotate(-1deg);
+      }
     }
   }
-  
+
+  @media (max-width: 960px) {
+    .about-photo {
+      margin-bottom: 0;
+    }
+  }
 `;

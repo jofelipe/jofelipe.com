@@ -1,49 +1,50 @@
-import Link from 'next/link';
 import client from 'graphql/client';
+import Link from 'next/link';
 
-import { GetStaticProps } from 'next';
+import {
+  GetProjectAfterQuery,
+  GetProjectBeforeQuery,
+  GetProjectBySlugQuery,
+  GetProjectsQuery,
+  Projeto,
+} from 'graphql/generated/graphql';
 import {
   GET_PROJECTS,
   GET_PROJECT_AFTER,
   GET_PROJECT_BEFORE,
   GET_PROJECT_BY_SLUG,
 } from 'graphql/queries';
-import {
-  GetProjectsQuery,
-  GetProjectBySlugQuery,
-  GetProjectBeforeQuery,
-  GetProjectAfterQuery,
-  Projeto,
-} from 'graphql/generated/graphql';
-import { NextSeo, ArticleJsonLd } from 'next-seo';
-import { useState, useEffect, useRef, MutableRefObject } from 'react';
-import { useRouter } from 'next/router';
 import useScrollspy from 'hooks/scrollspy';
+import { GetStaticProps } from 'next';
+import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import Layout from 'layouts/main';
 
-import ReactMarkdown from 'components/ReactMarkdown';
 import Footer from 'components/Footer';
+import ReactMarkdown from 'components/ReactMarkdown';
 
 import {
+  ArrowDownIcon,
   ArrowLeftIcon,
-  CalendarIcon,
-  ToolsIcon,
   ArrowUpIcon,
+  BeakerIcon,
+  CalendarIcon,
   ChecklistIcon,
   GoalIcon,
-  BeakerIcon,
   RocketIcon,
+  ToolsIcon,
 } from '@primer/octicons-react';
 
 import {
-  Wrapper,
-  Navigation,
-  Content,
-  PostInfo,
-  FeaturedImage,
-  Pagination,
   BackToTop,
+  Content,
+  FeaturedImage,
+  Navigation,
+  Pagination,
+  PostInfo,
+  Wrapper,
 } from 'styles/content/post';
 
 type Project = {
@@ -103,6 +104,7 @@ export default function Post({
     featuredImage,
     challenge,
     solution,
+    intro,
   } = projeto;
 
   return (
@@ -158,10 +160,10 @@ export default function Post({
               <div className="post-date" title="Atuação">
                 <ChecklistIcon size={24} /> {role}
               </div>
-              <div className="tools" title="Tools">
+              <div className="tools" title="Ferramentas">
                 <ToolsIcon size={24} /> {tools}
               </div>
-              <div className="post-read-time" title="Ano">
+              <div className="post-read-time" title="Ano do projeto">
                 <CalendarIcon size={24} /> {year}
               </div>
             </PostInfo>
@@ -206,12 +208,17 @@ export default function Post({
           />
 
           <Content className="project-page">
+            {intro && <ReactMarkdown content={intro} />}
+
             <section id="challenge" ref={challengeRef}>
               <div className="title">
                 <div className="bg">
                   <GoalIcon size={24} />
                   <h2>Desafio</h2>
                 </div>
+                <button type="button" onClick={() => smoothScroll(solutionRef)}>
+                  Pular para solução <ArrowDownIcon size={14} />
+                </button>
               </div>
 
               <ReactMarkdown content={challenge} />

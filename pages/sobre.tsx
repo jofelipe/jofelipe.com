@@ -1,9 +1,13 @@
+import Image from 'next/image';
+
 import { NextSeo } from 'next-seo';
 
 import Layout from 'layouts/main';
 
 import Button from 'components/Button';
 import Footer from 'components/Footer';
+
+import sobre from '../assets/sobre.jpg';
 
 import * as S from 'styles/about';
 
@@ -13,6 +17,14 @@ const Sobre = () => {
       <NextSeo title="Sobre mim" />
 
       <Layout headerStatic>
+        <Image
+          src={sobre}
+          alt="Imagens de Jonathan Felipe"
+          className="about-photo"
+          quality={95}
+          placeholder="blur"
+        />
+
         <S.Wrapper>
           <S.Text>
             <h1>Sobre</h1>
@@ -23,12 +35,11 @@ const Sobre = () => {
             </p>
 
             <p>
-              Comecei a trabalhar com Web em 2012, atuando como Web Designer.
-              Com o tempo, foquei minha carreira em Front-end, mas sempre
-              mantive interesse em UI Design e, por isso, sempre estive bem
-              próximo dessa área. Desde 2020 tenho trabalhado ativamente como
-              Designer, buscando alinhar minha experiência prática com
-              conhecimento teórico.
+              Comecei a trabalhar com Web em 2012 atuando como Web Designer, e
+              com o tempo, foquei minha carreira em Front-end, mas sempre
+              trabalhando bem próximo com a área de UI Design. Desde 2020 tenho
+              trabalhado ativamente como UI Developer, criando, prototipando e
+              desenvolvendo interfaces que agregam valor para os usuários.
             </p>
 
             <p>
@@ -37,14 +48,23 @@ const Sobre = () => {
               </strong>{' '}
               para ser um profissional de destaque nesta área, e acima de tudo,
               me sinto atraído por culturas que focam no coletivo para assim
-              potencializar o indivíduo.
+              potencializar o indivíduo, e por isso, a palavra-chave para mim em
+              um ambiente de tecnologia é <strong>colaboração</strong>.
             </p>
 
             <p>
               Extremamente curioso, dedico meu tempo livre a aprender mais com
-              meus hobbies atuais: Artes Plásticas e Fotografia. Fora da
-              internet, busco me conectar com a natureza através do ciclismo,
-              além de{' '}
+              meus hobbies atuais:{' '}
+              <a
+                href="https://www.discogs.com/user/jofelipe/collection"
+                title="Discogs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                colecionar discos de vinil
+              </a>{' '}
+              e brincar com fotografia. Fora da internet, busco me conectar com
+              a natureza através do ciclismo, além de{' '}
               <a
                 href="https://trips.jofelipe.com/"
                 title="Trips"
@@ -53,7 +73,7 @@ const Sobre = () => {
               >
                 viajar pelo mundo
               </a>{' '}
-              buscando explorar novos caminhos e mergulhar em culturas
+              buscando explorar novos caminhos mergulhando em culturas
               diferentes 🌎
             </p>
 
@@ -69,7 +89,6 @@ const Sobre = () => {
               </a>
               .
             </p>
-
             <Button href="/projetos">Quero ver seus projetos</Button>
           </S.Text>
 
@@ -80,7 +99,7 @@ const Sobre = () => {
               <ul className="experience-list">
                 <li>
                   <span className="period">Fev/20 - atual</span>
-                  <b className="role">UI Designer</b>
+                  <b className="role">Senior UI Developer</b>
                   <span className="name">Fitcard</span>
                 </li>
                 <li>
@@ -119,13 +138,16 @@ const Sobre = () => {
                 <li>Visual Design</li>
                 <li>Responsive Design</li>
                 <li>Mobile Design</li>
+                <li>Interaction Design</li>
                 <li>Emotional Design</li>
-                <li>UX Writing</li>
                 <li className="spacing">Prototyping</li>
                 <li>HTML5</li>
                 <li>CSS3</li>
                 <li>Javascript (ES6+)</li>
-                <li className="spacing">Next.js</li>
+                <li>React.js / Next.js</li>
+                <li>GraphQL</li>
+                <li>Git</li>
+                <li className="spacing">SEO</li>
                 <li>Figma</li>
                 <li>Photoshop</li>
                 <li>Illustrator</li>

@@ -1,10 +1,13 @@
-import Lottie from 'react-lottie-player';
 import Image from 'next/image';
+import { useState } from 'react';
+import Lottie from 'react-lottie-player';
 import useSWR from 'swr';
 
 import playingAnimation from 'animations/playing.json';
 
-import { Wrapper, NowPlaying } from './styles';
+import { CheckIcon, CopyIcon } from '@primer/octicons-react';
+
+import { NowPlaying, Wrapper } from './styles';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -21,10 +24,17 @@ interface ISong {
 const Footer = () => {
   const { data }: ISong = useSWR('/api/now-playing', fetcher);
 
+  const [copied, setCopied] = useState(false);
+
+  const handleClick = () => {
+    navigator.clipboard.writeText('eu@jofelipe.com');
+    setCopied(true);
+  };
+
   return (
     <Wrapper>
       {data?.title && (
-        <NowPlaying title="Spotify">
+        <NowPlaying title="Tocando no momento no Spotify">
           {data?.albumImageUrl && (
             <div className="cover">
               <Image
@@ -58,7 +68,21 @@ const Footer = () => {
         </NowPlaying>
       )}
 
-      <p>Feito com ❤️ ouvindo New Order 🕺🏼</p>
+      <p>
+        <div className="mail">
+          Diga um olá:{' '}
+          <a
+            title={copied ? 'Copiado!' : 'Clique para copiar'}
+            onClick={handleClick}
+          >
+            eu@jofelipe.com
+            <span className="tooltip">
+              {copied ? <CheckIcon size={12} /> : <CopyIcon size={12} />}
+            </span>
+          </a>
+        </div>
+        Feito com ❤️ ouvindo New Order 🕺🏼
+      </p>
     </Wrapper>
   );
 };

@@ -63,11 +63,11 @@ export default function Blog({ posts }: GetPostsQuery) {
             columnClassName="masonry-column"
           >
             {!searchValue &&
-              allPosts.map(({ date, readTime, slug, title }) =>
+              allPosts.map(({ date, readTime, createdAt, slug, title }) =>
                 slug.startsWith('https://') ? (
                   <Post key={slug}>
                     <a href={slug} target="_blank">
-                      <time>{date}</time>
+                      <time dateTime={createdAt}>{date}</time>
                       <h3>
                         {title} <LinkExternalIcon size={16} />
                       </h3>
@@ -79,7 +79,9 @@ export default function Blog({ posts }: GetPostsQuery) {
                 ) : (
                   <Post key={slug}>
                     <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                      <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                      <time dateTime={createdAt}>
+                        {format(parseISO(date), 'dd/MM/yyyy')}
+                      </time>
                       <h3>{title}</h3>
                       <span>
                         <ClockIcon size={16} /> {readTime} minutos de leitura
@@ -94,30 +96,33 @@ export default function Blog({ posts }: GetPostsQuery) {
             )}
 
             {searchValue &&
-              filteredBlogPosts.map(({ date, readTime, slug, title }) =>
-                slug.startsWith('https://') ? (
-                  <Post key={slug}>
-                    <a href={slug} target="_blank">
-                      <time>{date}</time>
-                      <h3>
-                        {title} <LinkExternalIcon size={16} />
-                      </h3>
-                      <span>
-                        <ClockIcon size={16} /> {readTime} minutos de leitura
-                      </span>
-                    </a>
-                  </Post>
-                ) : (
-                  <Post key={slug}>
-                    <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                      <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
-                      <h3>{title}</h3>
-                      <span>
-                        <ClockIcon size={16} /> {readTime} minutos de leitura
-                      </span>
-                    </Link>
-                  </Post>
-                )
+              filteredBlogPosts.map(
+                ({ date, readTime, createdAt, slug, title }) =>
+                  slug.startsWith('https://') ? (
+                    <Post key={slug}>
+                      <a href={slug} target="_blank">
+                        <time dateTime={createdAt}>{date}</time>
+                        <h3>
+                          {title} <LinkExternalIcon size={16} />
+                        </h3>
+                        <span>
+                          <ClockIcon size={16} /> {readTime} minutos de leitura
+                        </span>
+                      </a>
+                    </Post>
+                  ) : (
+                    <Post key={slug}>
+                      <Link href={'/post/[slug]'} as={`/post/${slug}`}>
+                        <time dateTime={createdAt}>
+                          {format(parseISO(date), 'dd/MM/yyyy')}
+                        </time>
+                        <h3>{title}</h3>
+                        <span>
+                          <ClockIcon size={16} /> {readTime} minutos de leitura
+                        </span>
+                      </Link>
+                    </Post>
+                  )
               )}
           </Masonry>
         </Wrapper>

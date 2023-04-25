@@ -12,9 +12,34 @@ export const Wrapper = styled.footer`
     margin: 0;
 
     a {
-      display: inline-block;
-      font-size: 80%;
+      color: ${(props) => props.theme.colors.textSecondary};
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      &:hover {
+        color: ${(props) => props.theme.colors.text};
+
+        .tooltip {
+          opacity: 1;
+        }
+      }
+
+      .tooltip {
+        position: absolute;
+        top: -1.5px;
+        right: -16px;
+        opacity: 0;
+        transition: all 0.1s linear;
+      }
     }
+  }
+
+  .mail {
+    position: relative;
+    left: -2px;
   }
 
   @media (max-width: 767px) {

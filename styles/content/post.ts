@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { shade } from 'polished';
+import styled from 'styled-components';
 
 interface IContent {
   isPage?: boolean;
@@ -154,6 +154,7 @@ export const Content = styled.div<IContent>`
 
   ul {
     margin: 0 0 32px;
+    padding: 0;
 
     li {
       font-size: 20px;
@@ -175,10 +176,14 @@ export const Content = styled.div<IContent>`
   }
 
   blockquote {
-    border-left: 4px solid;
-    padding-left: 24px;
+    border-left: 4px solid ${(props) => props.theme.colors.card};
     margin: 0 0 32px;
-    font-style: italic;
+    padding-left: 24px;
+
+    p {
+      font: 300 18px/24px Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium',
+        'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+    }
   }
 
   .margin {
@@ -187,6 +192,7 @@ export const Content = styled.div<IContent>`
 
   ol {
     margin: 0 0 32px;
+    padding: 0;
 
     li {
       font-size: 20px;
@@ -215,9 +221,11 @@ export const Content = styled.div<IContent>`
   }
 
   .title {
+    display: flex;
+    align-items: center;
     margin-bottom: 32px;
-    width: min-content;
     padding-top: 64px;
+    justify-content: space-between;
 
     .bg {
       background: ${(props) => props.theme.colors.card};
@@ -225,10 +233,10 @@ export const Content = styled.div<IContent>`
       display: flex;
       align-items: center;
       padding: 8px 16px;
-    }
 
-    svg {
-      margin-right: 16px;
+      svg {
+        margin-right: 16px;
+      }
     }
 
     h1,
@@ -237,6 +245,25 @@ export const Content = styled.div<IContent>`
     h4,
     h5 {
       margin-bottom: 0;
+    }
+
+    button {
+      background: none;
+      border: 1px dashed ${(props) => props.theme.colors.card};
+      color: ${(props) => props.theme.colors.text};
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 8px 8px 8px 12px;
+      transition: all 0.1s linear;
+
+      &:hover {
+        color: ${(props) => props.theme.colors.primary};
+      }
+
+      svg {
+        margin-left: 4px;
+      }
     }
   }
 
@@ -306,6 +333,10 @@ export const Content = styled.div<IContent>`
     h4 {
       font-size: 16px;
       line-height: 24px;
+    }
+
+    blockquote p {
+      font-size: 18px;
     }
 
     .btn-back {
@@ -446,6 +477,7 @@ export const Pagination = styled.div`
 
   @media (max-width: 480px) {
     a {
+      background: ${(props) => props.theme.colors.primary};
       padding: 8px 16px;
     }
   }

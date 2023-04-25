@@ -1,23 +1,23 @@
+import client from 'graphql/client';
+import Image from 'next/image';
 import Link from 'next/link';
 import Masonry from 'react-masonry-css';
-import Image from 'next/image';
-import client from 'graphql/client';
 
-import { useState } from 'react';
-import { GetStaticProps } from 'next';
-import { GET_PROJECTS } from 'graphql/queries';
 import { GetProjectsQuery } from 'graphql/generated/graphql';
+import { GET_PROJECTS } from 'graphql/queries';
+import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 import { masonryColumns } from 'utils';
 
 import Layout from 'layouts/main';
 
-import Project from 'components/Project';
 import Footer from 'components/Footer';
+import Project from 'components/Project';
 
-import { SearchIcon, ChecklistIcon } from '@primer/octicons-react';
+import { ChecklistIcon, SearchIcon } from '@primer/octicons-react';
 
-import { Wrapper, BlogHeader, Search, NoPostsFound } from 'styles/content';
+import { BlogHeader, NoPostsFound, Search, Wrapper } from 'styles/content';
 
 export default function Blog({ projetos }: GetProjectsQuery) {
   const [searchValue, setSearchValue] = useState('');
@@ -35,8 +35,7 @@ export default function Blog({ projetos }: GetProjectsQuery) {
           <BlogHeader>
             <h1>Projetos</h1>
             <p>
-              Aqui compartilho com vocês alguns dos meus projetos mais especiais
-              😍
+              Aqui compartilho com vocês alguns dos meus cases mais especiais 😍
             </p>
           </BlogHeader>
 

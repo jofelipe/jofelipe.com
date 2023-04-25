@@ -1,44 +1,43 @@
+import client from 'graphql/client';
+import Image from 'next/image';
 import Link from 'next/link';
 import Masonry from 'react-masonry-css';
-import Image from 'next/image';
-import client from 'graphql/client';
 
-import { GetStaticProps } from 'next';
-import { GET_POSTS, GET_PROJECTS } from 'graphql/queries';
+import { format, parseISO } from 'date-fns';
 import {
   GetPostsQuery,
   GetProjectsQuery,
   Post as PostType,
   Projeto as ProjetoType,
 } from 'graphql/generated/graphql';
+import { GET_POSTS, GET_PROJECTS } from 'graphql/queries';
+import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import { format, parseISO } from 'date-fns';
 import { masonryColumns } from 'utils';
 
 import Layout from 'layouts/main';
 
 import Button from 'components/Button';
-import Linkedin from 'components/svg/linkedin';
-import GitHub from 'components/svg/github';
-import Spotify from 'components/svg/spotify';
-import FlightRadar from 'components/svg/flightradar';
-import Academia from 'components/svg/academia';
+import Footer from 'components/Footer';
 import Post from 'components/Post';
 import Project from 'components/Project';
-import Footer from 'components/Footer';
+import FlightRadar from 'components/svg/flightradar';
+import GitHub from 'components/svg/github';
+import Linkedin from 'components/svg/linkedin';
+import Spotify from 'components/svg/spotify';
 
 import jonathan from '../assets/jonathan.jpg';
 
-import { ClockIcon, ChecklistIcon } from '@primer/octicons-react';
+import { ChecklistIcon, ClockIcon } from '@primer/octicons-react';
 
 import {
-  Wrapper,
-  TextHome,
   Content,
-  PhotoSocial,
-  Social,
   LatestPosts,
+  PhotoSocial,
   RecentProjects,
+  Social,
+  TextHome,
+  Wrapper,
 } from 'styles/index';
 
 type Home = {
@@ -55,27 +54,32 @@ export default function Home({ posts, projetos }: Home) {
         <Wrapper>
           <TextHome>
             <div className="fixed-scroll">
-              <h1>
-                UI Designer &amp;
-                <br />
-                Front-end Dev.
-              </h1>
+              <h1>Senior UI Developer</h1>
               <p>
                 Olá, sou o Jonathan <span className="wave-animation">👋🏼</span>
               </p>
               <p>
                 Com mais de dez anos de experiência em interfaces para Web e
-                Mobile, tenho formação em Análise e Desenvolvimento de Sistemas
-                pela UNIP, e atualmente curso uma especialização em Design
-                Emocional pela Belas Artes.
+                Mobile, ajudo empresas a criar{' '}
+                <strong className="text-highlight">
+                  produtos digitais acessíveis
+                </strong>
+                , altamente funcionais e esteticamente agradáveis através do meu
+                conhecimento em UI Design & Desenvolvimento Front-end.
               </p>
               <p>
-                Como UI Designer, meu objetivo é combinar meu conhecimento em
-                Design e minha experiência como Desenvolvedor para criar
-                interfaces acessíveis, altamente funcionais e{' '}
-                <strong className="text-highlight">
-                  esteticamente agradáveis.
-                </strong>
+                Atualmente trabalhando remoto na{' '}
+                <a
+                  href="https://www.fitcard.com.br/"
+                  title="Fitcard"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Fitcard
+                </a>
+                , tenho formação em Análise e Desenvolvimento de Sistemas pela
+                UNIP e curso uma especialização em Design Emocional pela Belas
+                Artes.
               </p>
               <Button href="/sobre">Quero saber mais</Button>
             </div>
@@ -110,22 +114,22 @@ export default function Home({ posts, projetos }: Home) {
                   </li>
                   <li>
                     <a
-                      href="https://belasartes.academia.edu/jofelipe"
-                      title="Academia"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Academia />
-                    </a>
-                  </li>
-                  <li>
-                    <a
                       href="https://my.flightradar24.com/jofelipe"
                       title="myFlightradar24"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <FlightRadar />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://open.spotify.com/user/1244967657"
+                      title="Spotify"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Spotify />
                     </a>
                   </li>
                 </ul>
@@ -180,10 +184,12 @@ export default function Home({ posts, projetos }: Home) {
                 className="masonry"
                 columnClassName="masonry-column"
               >
-                {posts.map(({ slug, date, title, readTime }) => (
+                {posts.map(({ slug, date, title, createdAt, readTime }) => (
                   <Post key={slug}>
                     <Link href={'/post/[slug]'} as={`/post/${slug}`}>
-                      <time>{format(parseISO(date), 'dd/MM/yyyy')}</time>
+                      <time dateTime={createdAt}>
+                        {format(parseISO(date), 'dd/MM/yyyy')}
+                      </time>
                       <h3>{title}</h3>
                       <span>
                         <ClockIcon size={16} /> {readTime} minutos de leitura

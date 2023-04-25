@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
 const marginBottomHome = css`
-  margin-bottom: 128px;
+  margin-bottom: 64px;
 
   @media (max-width: 1140px) {
-    margin-bottom: 64px;
+    margin-bottom: 48px;
   }
 `;
 

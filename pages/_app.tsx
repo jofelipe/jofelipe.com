@@ -1,6 +1,8 @@
+import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 import { Archivo } from 'next/font/google';
-import { DefaultSeo } from 'next-seo';
+import { useEffect } from 'react';
+import { hotjar } from 'react-hotjar';
 import { ThemeProvider } from 'styled-components';
 
 import theme from 'styles/theme';
@@ -11,12 +13,16 @@ const archivo = Archivo({
 });
 
 function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    hotjar.initialize(3437870, 6);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <DefaultSeo
         title="Jonathan Felipe"
         titleTemplate="%s - Jonathan Felipe"
-        description="Site pessoal de Jonathan Felipe, UI Designer. Um espaço para divulgação de seus projetos e posts relacionados ao seu trabalho."
+        description="Site pessoal de Jonathan Felipe, UI Developer. Um espaço para divulgação de seus projetos e posts relacionados ao seu trabalho."
         openGraph={{
           type: 'website',
           locale: 'pt_BR',
