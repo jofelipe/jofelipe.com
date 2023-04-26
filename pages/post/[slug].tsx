@@ -1,35 +1,38 @@
 import client from 'graphql/client';
 
-import { GetStaticProps } from 'next';
-import { GET_POSTS, GET_POST_BY_SLUG } from 'graphql/queries';
-import { GetPostsQuery, GetPostBySlugQuery } from 'graphql/generated/graphql';
-import { NextSeo, ArticleJsonLd } from 'next-seo';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { format, parseISO } from 'date-fns';
+import { GetPostBySlugQuery, GetPostsQuery } from 'graphql/generated/graphql';
+import { GET_POSTS, GET_POST_BY_SLUG } from 'graphql/queries';
+import { GetStaticProps } from 'next';
+import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import Layout from 'layouts/main';
 
-import ReactMarkdown from 'components/ReactMarkdown';
 import Footer from 'components/Footer';
+import ReactMarkdown from 'components/ReactMarkdown';
 
 import {
   ArrowLeftIcon,
+  ArrowUpIcon,
   CalendarIcon,
   ClockIcon,
-  ArrowUpIcon,
 } from '@primer/octicons-react';
 
 import {
-  Wrapper,
-  Content,
-  PostInfo,
-  FeaturedImage,
   BackToTop,
+  Content,
+  FeaturedImage,
+  PostInfo,
+  Wrapper,
 } from 'styles/content/post';
+
+import t from 'content/translation.json';
 
 export default function Post({ post }: GetPostBySlugQuery) {
   const router = useRouter();
+  const { locale } = router;
 
   const [showScroll, setShowScroll] = useState(false);
 
@@ -107,19 +110,20 @@ export default function Post({ post }: GetPostBySlugQuery) {
               <button
                 className="btn-back"
                 onClick={() => router.back()}
-                title="Voltar"
+                title={t[locale].post.backText}
               >
                 <ArrowLeftIcon size={32} />
               </button>
               <h1>{title}</h1>
             </header>
             <PostInfo>
-              <div className="post-date" title="Data de publicação">
+              <div className="post-date" title={t[locale].post.dateText}>
                 <CalendarIcon size={24} />{' '}
                 {format(parseISO(date), 'dd/MM/yyyy')}
               </div>
-              <div className="post-read-time" title="Tempo de leitura">
-                <ClockIcon size={24} /> {readTime} minutos de leitura
+              <div className="post-read-time" title={t[locale].post.readTime}>
+                <ClockIcon size={24} />{' '}
+                {`${readTime} ${t[locale].post.readTimeText}`}
               </div>
             </PostInfo>
           </Content>
@@ -134,9 +138,9 @@ export default function Post({ post }: GetPostBySlugQuery) {
         </Wrapper>
 
         <BackToTop
-          className={showScroll ? 'active': ''}
+          className={showScroll ? 'active' : ''}
           onClick={scrollTop}
-          title="Voltar para o topo"
+          title={t[locale].post.backToTop}
         >
           <ArrowUpIcon size={32} />
         </BackToTop>

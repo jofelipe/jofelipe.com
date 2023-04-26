@@ -1,8 +1,10 @@
-import { useState, FC } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
 
-import { Wrapper, Menu, MobileMenu } from './styles';
+import { Menu, MobileMenu, Wrapper } from './styles';
+
+import t from 'content/translation.json';
 
 interface IHeader {
   isStatic: boolean;
@@ -10,6 +12,7 @@ interface IHeader {
 
 const Header: FC<IHeader> = ({ isStatic }) => {
   const router = useRouter();
+  const { locale } = router;
 
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -26,10 +29,10 @@ const Header: FC<IHeader> = ({ isStatic }) => {
               <Link href="/">Home</Link>
             </li>
             <li className={router.pathname === '/sobre' ? 'active' : ''}>
-              <Link href="/sobre">Sobre</Link>
+              <Link href="/sobre">{t[locale].menu.about}</Link>
             </li>
             <li className={router.pathname.includes('projeto') ? 'active' : ''}>
-              <Link href="/projetos">Projetos</Link>
+              <Link href="/projetos">{t[locale].menu.projects}</Link>
             </li>
             <li
               className={

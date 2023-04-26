@@ -7,6 +7,7 @@ import { GetProjectsQuery } from 'graphql/generated/graphql';
 import { GET_PROJECTS } from 'graphql/queries';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { masonryColumns } from 'utils';
 
@@ -19,8 +20,12 @@ import { ChecklistIcon, SearchIcon } from '@primer/octicons-react';
 
 import { BlogHeader, NoPostsFound, Search, Wrapper } from 'styles/content';
 
+import t from 'content/translation.json';
+
 export default function Blog({ projetos }: GetProjectsQuery) {
   const [searchValue, setSearchValue] = useState('');
+  const router = useRouter();
+  const { locale } = router;
 
   const filteredProjects = projetos.filter((project) =>
     project.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -28,22 +33,20 @@ export default function Blog({ projetos }: GetProjectsQuery) {
 
   return (
     <>
-      <NextSeo title="Projetos" />
+      <NextSeo title={t[locale].projects.title} />
 
       <Layout headerStatic>
         <Wrapper>
           <BlogHeader>
-            <h1>Projetos</h1>
-            <p>
-              Aqui compartilho com vocês alguns dos meus cases mais especiais 😍
-            </p>
+            <h1>{t[locale].projects.title}</h1>
+            <p>{t[locale].projects.description}</p>
           </BlogHeader>
 
           <Search>
             <SearchIcon size={32} />
             <input
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Pesquisar por..."
+              placeholder={t[locale].projects.searchText}
               autoFocus
             />
           </Search>
@@ -76,7 +79,7 @@ export default function Blog({ projetos }: GetProjectsQuery) {
               ))}
 
             {!filteredProjects.length && (
-              <NoPostsFound>Nenhum projeto encontrado 😭</NoPostsFound>
+              <NoPostsFound>{t[locale].projects.notFound}</NoPostsFound>
             )}
 
             {searchValue &&
@@ -111,9 +114,10 @@ export default function Blog({ projetos }: GetProjectsQuery) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const { projetos } = await client.request<GetProjectsQuery>(GET_PROJECTS, {
     first: 50,
+    locale,
   });
 
   if (!projetos) {

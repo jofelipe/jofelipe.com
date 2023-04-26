@@ -57,7 +57,7 @@ export default createGlobalStyle`
   }
 
   @media (min-width: 960px) {
-    .text-highlight {
+    .has-custom-strong strong:first-of-type {
       display: inline-block;
       position: relative;
 

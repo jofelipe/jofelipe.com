@@ -1,11 +1,14 @@
 import styled, { css } from 'styled-components';
-import { shade } from 'polished';
 
 const titleHome = css`
   color: ${(props) => props.theme.colors.primary};
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 32px;
+
+  small {
+    font-size: 40%;
+  }
 
   @media (max-width: 1140px) {
     font-size: 40px;
@@ -77,7 +80,7 @@ export const TextHome = styled.article`
     }
   }
 
-  .wave-animation {
+  em {
     animation-name: wave-animation;
     animation-duration: 3s;
     animation-iteration-count: 3;
@@ -86,14 +89,30 @@ export const TextHome = styled.article`
   }
 
   @keyframes wave-animation {
-    0% { transform: rotate( 0.0deg) }
-    15% { transform: rotate(14.0deg) }
-    30% { transform: rotate(-8.0deg) }
-    40% { transform: rotate(14.0deg) }
-    50% { transform: rotate(-4.0deg) }
-    60% { transform: rotate(10.0deg) }
-    70% { transform: rotate( 0.0deg) }
-   100% { transform: rotate( 0.0deg) }
+    0% {
+      transform: rotate(0deg);
+    }
+    15% {
+      transform: rotate(14deg);
+    }
+    30% {
+      transform: rotate(-8deg);
+    }
+    40% {
+      transform: rotate(14deg);
+    }
+    50% {
+      transform: rotate(-4deg);
+    }
+    60% {
+      transform: rotate(10deg);
+    }
+    70% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
   }
 
   h1 {

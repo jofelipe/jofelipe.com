@@ -1,19 +1,20 @@
+import client from 'graphql/client';
 import Link from 'next/link';
 import Masonry from 'react-masonry-css';
-import client from 'graphql/client';
 
-import { GetStaticProps } from 'next';
-import { GET_POSTS } from 'graphql/queries';
-import { GetPostsQuery } from 'graphql/generated/graphql';
-import { NextSeo } from 'next-seo';
-import { useState } from 'react';
 import { format, parseISO } from 'date-fns';
+import { GetPostsQuery } from 'graphql/generated/graphql';
+import { GET_POSTS } from 'graphql/queries';
+import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { masonryColumns } from 'utils';
 
 import Layout from 'layouts/main';
 
-import Post from 'components/Post';
 import Footer from 'components/Footer';
+import Post from 'components/Post';
 
 import { staticPosts } from 'content/staticPosts';
 
@@ -23,12 +24,16 @@ import {
   SearchIcon,
 } from '@primer/octicons-react';
 
-import { Wrapper, BlogHeader, Search, NoPostsFound } from 'styles/content';
+import { BlogHeader, NoPostsFound, Search, Wrapper } from 'styles/content';
+
+import t from 'content/translation.json';
 
 export default function Blog({ posts }: GetPostsQuery) {
   const allPosts = [...posts, ...staticPosts];
 
   const [searchValue, setSearchValue] = useState('');
+  const router = useRouter();
+  const { locale } = router;
 
   const filteredBlogPosts = allPosts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -42,17 +47,14 @@ export default function Blog({ posts }: GetPostsQuery) {
         <Wrapper>
           <BlogHeader>
             <h1>Blog</h1>
-            <p>
-              Aqui compartilho com vocês minhas paixões, viagens e o universo
-              web 😊
-            </p>
+            <p>{t[locale].blog.description}</p>
           </BlogHeader>
 
           <Search>
             <SearchIcon size={32} />
             <input
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Pesquisar por..."
+              placeholder={t[locale].blog.searchText}
               autoFocus
             />
           </Search>
@@ -72,7 +74,8 @@ export default function Blog({ posts }: GetPostsQuery) {
                         {title} <LinkExternalIcon size={16} />
                       </h3>
                       <span>
-                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                        <ClockIcon size={16} />
+                        {`${readTime} ${t[locale].blog.readTimeText}`}
                       </span>
                     </a>
                   </Post>
@@ -84,7 +87,8 @@ export default function Blog({ posts }: GetPostsQuery) {
                       </time>
                       <h3>{title}</h3>
                       <span>
-                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                        <ClockIcon size={16} />{' '}
+                        {`${readTime} ${t[locale].blog.readTimeText}`}
                       </span>
                     </Link>
                   </Post>
@@ -92,7 +96,7 @@ export default function Blog({ posts }: GetPostsQuery) {
               )}
 
             {!filteredBlogPosts.length && (
-              <NoPostsFound>Nenhum post encontrado 😭</NoPostsFound>
+              <NoPostsFound>{t[locale].blog.notFound}</NoPostsFound>
             )}
 
             {searchValue &&
@@ -106,7 +110,8 @@ export default function Blog({ posts }: GetPostsQuery) {
                           {title} <LinkExternalIcon size={16} />
                         </h3>
                         <span>
-                          <ClockIcon size={16} /> {readTime} minutos de leitura
+                          <ClockIcon size={16} />{' '}
+                          {`${readTime} ${t[locale].blog.readTimeText}`}
                         </span>
                       </a>
                     </Post>
@@ -118,7 +123,8 @@ export default function Blog({ posts }: GetPostsQuery) {
                         </time>
                         <h3>{title}</h3>
                         <span>
-                          <ClockIcon size={16} /> {readTime} minutos de leitura
+                          <ClockIcon size={16} />{' '}
+                          {`${readTime} ${t[locale].blog.readTimeText}`}
                         </span>
                       </Link>
                     </Post>

@@ -38,6 +38,7 @@ export const Wrapper = styled.footer`
   }
 
   .mail {
+    display: block;
     position: relative;
     left: -2px;
   }

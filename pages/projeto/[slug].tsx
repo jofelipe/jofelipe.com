@@ -47,6 +47,8 @@ import {
   Wrapper,
 } from 'styles/content/post';
 
+import t from 'content/translation.json';
+
 type Project = {
   projeto: Projeto;
   previousProject: string | null;
@@ -59,6 +61,7 @@ export default function Post({
   nextProject,
 }: Project) {
   const router = useRouter();
+  const { locale } = router;
 
   const challengeRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
@@ -150,20 +153,23 @@ export default function Post({
               <button
                 className="btn-back"
                 onClick={() => router.back()}
-                title="Voltar"
+                title={t[locale].project.backText}
               >
                 <ArrowLeftIcon size={32} />
               </button>
               <h1>{name}</h1>
             </header>
             <PostInfo>
-              <div className="post-date" title="Atuação">
+              <div className="post-date" title={t[locale].project.roleText}>
                 <ChecklistIcon size={24} /> {role}
               </div>
-              <div className="tools" title="Ferramentas">
+              <div className="tools" title={t[locale].project.toolsText}>
                 <ToolsIcon size={24} /> {tools}
               </div>
-              <div className="post-read-time" title="Ano do projeto">
+              <div
+                className="post-read-time"
+                title={t[locale].project.yearText}
+              >
                 <CalendarIcon size={24} /> {year}
               </div>
             </PostInfo>
@@ -177,7 +183,7 @@ export default function Post({
                   type="button"
                   onClick={() => smoothScroll(challengeRef)}
                 >
-                  <GoalIcon size={16} /> Desafio
+                  <GoalIcon size={16} /> {t[locale].project.challengeText}
                 </button>
               </li>
               <li>
@@ -186,7 +192,7 @@ export default function Post({
                   type="button"
                   onClick={() => smoothScroll(processRef)}
                 >
-                  <BeakerIcon size={16} /> Processo
+                  <BeakerIcon size={16} /> {t[locale].project.processText}
                 </button>
               </li>
               <li>
@@ -195,7 +201,7 @@ export default function Post({
                   type="button"
                   onClick={() => smoothScroll(solutionRef)}
                 >
-                  <RocketIcon size={16} /> Solução
+                  <RocketIcon size={16} /> {t[locale].project.solutionText}
                 </button>
               </li>
             </ul>
@@ -214,10 +220,10 @@ export default function Post({
               <div className="title">
                 <div className="bg">
                   <GoalIcon size={24} />
-                  <h2>Desafio</h2>
+                  <h2>{t[locale].project.challengeText}</h2>
                 </div>
                 <button type="button" onClick={() => smoothScroll(solutionRef)}>
-                  Pular para solução <ArrowDownIcon size={14} />
+                  {t[locale].project.jumpSolution} <ArrowDownIcon size={14} />
                 </button>
               </div>
 
@@ -228,7 +234,7 @@ export default function Post({
               <div className="title">
                 <div className="bg">
                   <BeakerIcon size={24} />
-                  <h2>Processo</h2>
+                  <h2>{t[locale].project.processText}</h2>
                 </div>
               </div>
 
@@ -239,7 +245,7 @@ export default function Post({
               <div className="title">
                 <div className="bg">
                   <RocketIcon size={24} />
-                  <h2>Solução</h2>
+                  <h2>{t[locale].project.solutionText}</h2>
                 </div>
               </div>
 
@@ -249,12 +255,16 @@ export default function Post({
             <Pagination className={showScroll ? 'active' : ''}>
               {previousProject && (
                 <div className="previous">
-                  <Link href={previousProject}>Projeto anterior</Link>
+                  <Link href={previousProject}>
+                    {t[locale].project.previousProject}
+                  </Link>
                 </div>
               )}
               {nextProject && (
                 <div className="next">
-                  <Link href={nextProject}>Próximo projeto</Link>
+                  <Link href={nextProject}>
+                    {t[locale].project.nextProject}
+                  </Link>
                 </div>
               )}
             </Pagination>
@@ -264,7 +274,7 @@ export default function Post({
         <BackToTop
           className={showScroll ? 'active' : ''}
           onClick={() => smoothScroll(null)}
-          title="Voltar para o topo"
+          title={t[locale].project.backToTop}
         >
           <ArrowUpIcon size={32} />
         </BackToTop>
@@ -277,7 +287,8 @@ export default function Post({
 
 export async function getStaticPaths() {
   const { projetos } = await client.request<GetProjectsQuery>(GET_PROJECTS, {
-    first: 50,
+    first: 10,
+    locale: 'pt',
   });
 
   const paths = projetos.map(({ slug }) => ({
@@ -290,11 +301,12 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   const { projeto } = await client.request<GetProjectBySlugQuery>(
     GET_PROJECT_BY_SLUG,
     {
       slug: `${params?.slug}`,
+      locale,
     }
   );
 
