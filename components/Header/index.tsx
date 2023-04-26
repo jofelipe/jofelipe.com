@@ -4,7 +4,7 @@ import { FC, useState } from 'react';
 
 import { Menu, MobileMenu, Wrapper } from './styles';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 interface IHeader {
   isStatic: boolean;

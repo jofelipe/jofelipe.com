@@ -1,8 +1,6 @@
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 import { Archivo } from 'next/font/google';
-import { useEffect } from 'react';
-import { hotjar } from 'react-hotjar';
 import { ThemeProvider } from 'styled-components';
 
 import theme from 'styles/theme';
@@ -13,10 +11,6 @@ const archivo = Archivo({
 });
 
 function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    hotjar.initialize(3437870, 6);
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <DefaultSeo

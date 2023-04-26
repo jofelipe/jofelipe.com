@@ -3,7 +3,8 @@ module.exports = {
     domains: ['i.scdn.co', 'media.graphassets.com'],
   },
   i18n: {
-    locales: ['pt', 'en'],
-    defaultLocale: 'pt',
+    locales: ['default', 'pt', 'en'],
+    defaultLocale: 'default',
+    localeDetection: false,
   },
 };
