@@ -1,18 +1,22 @@
 import client from 'graphql/client';
+import parse from 'html-react-parser';
 import Image from 'next/image';
 import Link from 'next/link';
 import Masonry from 'react-masonry-css';
 
 import { format, parseISO } from 'date-fns';
 import {
+  GetPageByIdQuery,
   GetPostsQuery,
   GetProjectsQuery,
+  Page,
   Post as PostType,
   Projeto as ProjetoType,
 } from 'graphql/generated/graphql';
-import { GET_POSTS, GET_PROJECTS } from 'graphql/queries';
+import { GET_PAGE_BY_ID, GET_POSTS, GET_PROJECTS } from 'graphql/queries';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { masonryColumns } from 'utils';
 
 import Layout from 'layouts/main';
@@ -40,48 +44,29 @@ import {
   Wrapper,
 } from 'styles/index';
 
+import t from 'content/translation.json';
+
 type Home = {
   posts: PostType[];
   projetos: ProjetoType[];
+  page: Page;
 };
 
-export default function Home({ posts, projetos }: Home) {
+export default function Home({ posts, projetos, page }: Home) {
+  const router = useRouter();
+  const { locale } = router;
+
   return (
     <>
-      <NextSeo title="Página inicial" />
+      <NextSeo title={t[locale].home.title} />
 
       <Layout>
         <Wrapper>
           <TextHome>
-            <div className="fixed-scroll">
-              <h1>Senior UI Developer</h1>
-              <p>
-                Olá, sou o Jonathan <span className="wave-animation">👋🏼</span>
-              </p>
-              <p>
-                Com mais de dez anos de experiência em interfaces para Web e
-                Mobile, ajudo empresas a criar{' '}
-                <strong className="text-highlight">
-                  produtos digitais acessíveis
-                </strong>
-                , altamente funcionais e esteticamente agradáveis através do meu
-                conhecimento em UI Design & Desenvolvimento Front-end.
-              </p>
-              <p>
-                Atualmente trabalhando remoto na{' '}
-                <a
-                  href="https://www.fitcard.com.br/"
-                  title="Fitcard"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Fitcard
-                </a>
-                , tenho formação em Análise e Desenvolvimento de Sistemas pela
-                UNIP e curso uma especialização em Design Emocional pela Belas
-                Artes.
-              </p>
-              <Button href="/sobre">Quero saber mais</Button>
+            <div className="fixed-scroll has-custom-strong">
+              <h1>{t[locale].home.role}</h1>
+              {parse(page.content.html)}
+              <Button href="/sobre">{t[locale].home.button}</Button>
             </div>
           </TextHome>
 
@@ -144,7 +129,7 @@ export default function Home({ posts, projetos }: Home) {
             </PhotoSocial>
 
             <RecentProjects>
-              <h2>Projetos recentes</h2>
+              <h2>{t[locale].home.recentProjects}</h2>
 
               <Masonry
                 breakpointCols={masonryColumns}
@@ -177,7 +162,10 @@ export default function Home({ posts, projetos }: Home) {
             </RecentProjects>
 
             <LatestPosts>
-              <h2>Posts recentes</h2>
+              <h2>
+                {t[locale].home.recentPosts}{' '}
+                {locale === 'en' && <small>(pt-BR)</small>}
+              </h2>
 
               <Masonry
                 breakpointCols={masonryColumns}
@@ -192,7 +180,8 @@ export default function Home({ posts, projetos }: Home) {
                       </time>
                       <h3>{title}</h3>
                       <span>
-                        <ClockIcon size={16} /> {readTime} minutos de leitura
+                        <ClockIcon size={16} />{' '}
+                        {`${readTime} ${t[locale].blog.readTimeText}`}
                       </span>
                     </Link>
                   </Post>
@@ -208,16 +197,22 @@ export default function Home({ posts, projetos }: Home) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const { posts } = await client.request<GetPostsQuery>(GET_POSTS, {
     first: 6,
   });
 
   const { projetos } = await client.request<GetProjectsQuery>(GET_PROJECTS, {
     first: 4,
+    locale,
   });
 
-  if (!posts || !projetos) {
+  const { page } = await client.request<GetPageByIdQuery>(GET_PAGE_BY_ID, {
+    id: 'clgw8vxwj00ek0cltenh2btno',
+    locale,
+  });
+
+  if (!posts || !projetos || !page) {
     return { notFound: true };
   }
 
@@ -225,6 +220,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
       projetos,
+      page,
     },
   };
 };

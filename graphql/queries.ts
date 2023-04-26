@@ -39,8 +39,8 @@ export const GET_POST_BY_SLUG = gql`
 `;
 
 export const GET_PROJECTS = gql`
-  query getProjects($first: Int) {
-    projetos(first: $first, orderBy: year_DESC) {
+  query getProjects($first: Int, $locale: Locale!) {
+    projetos(first: $first, orderBy: year_DESC, locales: [$locale, en]) {
       name
       description
       slug
@@ -69,8 +69,8 @@ export const GET_PROJECT_AFTER = gql`
 `;
 
 export const GET_PROJECT_BY_SLUG = gql`
-  query getProjectBySlug($slug: String!) {
-    projeto(where: { slug: $slug }) {
+  query getProjectBySlug($slug: String!, $locale: Locale!) {
+    projeto(locales: [$locale, en], where: { slug: $slug }) {
       id
       name
       slug
@@ -87,6 +87,23 @@ export const GET_PROJECT_BY_SLUG = gql`
       }
       thumbnail {
         url
+      }
+    }
+  }
+`;
+
+export const GET_PAGE_BY_ID = gql`
+  query getPageById($id: ID!, $locale: Locale!) {
+    page(locales: [$locale, en], where: { id: $id }) {
+      title
+      content {
+        html
+      }
+      experience {
+        html
+      }
+      skills {
+        html
       }
     }
   }

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Lottie from 'react-lottie-player';
 import useSWR from 'swr';
@@ -8,6 +9,8 @@ import playingAnimation from 'animations/playing.json';
 import { CheckIcon, CopyIcon } from '@primer/octicons-react';
 
 import { NowPlaying, Wrapper } from './styles';
+
+import t from 'content/translation.json';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -25,6 +28,8 @@ const Footer = () => {
   const { data }: ISong = useSWR('/api/now-playing', fetcher);
 
   const [copied, setCopied] = useState(false);
+  const router = useRouter();
+  const { locale } = router;
 
   const handleClick = () => {
     navigator.clipboard.writeText('eu@jofelipe.com');
@@ -34,7 +39,7 @@ const Footer = () => {
   return (
     <Wrapper>
       {data?.title && (
-        <NowPlaying title="Tocando no momento no Spotify">
+        <NowPlaying title={t[locale].footer.spotify}>
           {data?.albumImageUrl && (
             <div className="cover">
               <Image
@@ -69,10 +74,10 @@ const Footer = () => {
       )}
 
       <p>
-        <div className="mail">
-          Diga um olá:{' '}
+        <span className="mail">
+          {`${t[locale].footer.sayHi} `}
           <a
-            title={copied ? 'Copiado!' : 'Clique para copiar'}
+            title={copied ? t[locale].footer.copied : t[locale].footer.copy}
             onClick={handleClick}
           >
             eu@jofelipe.com
@@ -80,8 +85,8 @@ const Footer = () => {
               {copied ? <CheckIcon size={12} /> : <CopyIcon size={12} />}
             </span>
           </a>
-        </div>
-        Feito com ❤️ ouvindo New Order 🕺🏼
+        </span>
+        {t[locale].footer.madeWith}
       </p>
     </Wrapper>
   );

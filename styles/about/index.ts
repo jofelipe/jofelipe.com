@@ -158,13 +158,18 @@ export const Experience = styled.div`
       }
     }
 
-    .period {
+    br {
+      display: none;
+    }
+
+    em {
       display: block;
       font-size: 14px;
+      font-style: normal;
       margin-bottom: 8px;
     }
 
-    .role {
+    strong {
       color: #fff;
       display: block;
     }
