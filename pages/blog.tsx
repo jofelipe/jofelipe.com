@@ -26,7 +26,7 @@ import {
 
 import { BlogHeader, NoPostsFound, Search, Wrapper } from 'styles/content';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 export default function Blog({ posts }: GetPostsQuery) {
   const allPosts = [...posts, ...staticPosts];

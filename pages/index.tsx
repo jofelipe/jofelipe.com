@@ -44,7 +44,7 @@ import {
   Wrapper,
 } from 'styles/index';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 type Home = {
   posts: PostType[];
@@ -204,12 +204,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const { projetos } = await client.request<GetProjectsQuery>(GET_PROJECTS, {
     first: 4,
-    locale,
+    locale: locale === 'default' ? 'pt' : locale,
   });
 
   const { page } = await client.request<GetPageByIdQuery>(GET_PAGE_BY_ID, {
     id: 'clgw8vxwj00ek0cltenh2btno',
-    locale,
+    locale: locale === 'default' ? 'pt' : locale,
   });
 
   if (!posts || !projetos || !page) {

@@ -47,7 +47,7 @@ import {
   Wrapper,
 } from 'styles/content/post';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 type Project = {
   projeto: Projeto;
@@ -306,7 +306,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
     GET_PROJECT_BY_SLUG,
     {
       slug: `${params?.slug}`,
-      locale,
+      locale: locale === 'default' ? 'pt' : locale,
     }
   );
 

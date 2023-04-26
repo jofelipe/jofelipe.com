@@ -17,7 +17,7 @@ import sobre from '../assets/sobre.jpg';
 
 import * as S from 'styles/about';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 type About = {
   page: Page;
@@ -71,7 +71,7 @@ export default function Sobre({ page }: About) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const { page } = await client.request<GetPageByIdQuery>(GET_PAGE_BY_ID, {
     id: 'clgwmtgab0gfm0bki9balrv6s',
-    locale,
+    locale: locale === 'default' ? 'pt' : locale,
   });
 
   if (!page) {

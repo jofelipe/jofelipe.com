@@ -20,7 +20,7 @@ import { ChecklistIcon, SearchIcon } from '@primer/octicons-react';
 
 import { BlogHeader, NoPostsFound, Search, Wrapper } from 'styles/content';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 export default function Blog({ projetos }: GetProjectsQuery) {
   const [searchValue, setSearchValue] = useState('');
@@ -117,7 +117,7 @@ export default function Blog({ projetos }: GetProjectsQuery) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const { projetos } = await client.request<GetProjectsQuery>(GET_PROJECTS, {
     first: 50,
-    locale,
+    locale: locale === 'default' ? 'pt' : locale,
   });
 
   if (!projetos) {

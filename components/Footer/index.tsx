@@ -10,7 +10,7 @@ import { CheckIcon, CopyIcon } from '@primer/octicons-react';
 
 import { NowPlaying, Wrapper } from './styles';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 

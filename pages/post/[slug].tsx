@@ -28,7 +28,7 @@ import {
   Wrapper,
 } from 'styles/content/post';
 
-import t from 'content/translation.json';
+import t from 'content/translation';
 
 export default function Post({ post }: GetPostBySlugQuery) {
   const router = useRouter();
