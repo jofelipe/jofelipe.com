@@ -26,11 +26,9 @@ export const Wrapper = styled.header<IHeader>`
   }
 
   .logo {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.4px;
-    text-transform: uppercase;
+    height: 50px;
+    display: block;
+    width: 180px;
   }
 
   ${(props) =>
@@ -54,7 +52,8 @@ export const Wrapper = styled.header<IHeader>`
     padding: 32px;
 
     .logo {
-      font-size: 20px;
+      height: 37px;
+      width: 140px;
     }
 
     .alignment {

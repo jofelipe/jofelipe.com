@@ -20,7 +20,7 @@ const Error = () => {
 
       <Layout headerStatic>
         <Wrapper>
-          <h1>E{t[locale].error404.title}</h1>
+          <h1>{t[locale].error404.title}</h1>
           <ErrorWrapper>
             <p>{t[locale].error404.description}</p>
 

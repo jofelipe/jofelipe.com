@@ -4,6 +4,7 @@ import { Archivo } from 'next/font/google';
 import { ThemeProvider } from 'styled-components';
 
 import theme from 'styles/theme';
+import '../styles/prismjs.css';
 
 const archivo = Archivo({
   weight: ['300', '400', '700'],

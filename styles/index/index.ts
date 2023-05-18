@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
   flex-direction: row;
   min-height: 100%;
   align-items: stretch;
-  padding-top: 155px;
+  padding-top: 175px;
 
   @media (max-width: 1400px) {
     padding-top: 124px;
