@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 
+import Logo from 'components/svg/logo';
+
 import { Menu, MobileMenu, Wrapper } from './styles';
 
 import t from 'content/translation';
@@ -20,7 +22,9 @@ const Header: FC<IHeader> = ({ isStatic }) => {
     <Wrapper isStatic={isStatic}>
       <div className="alignment">
         <Link href="/">
-          <span className="logo">Jonathan Felipe</span>
+          <span className="logo">
+            <Logo />
+          </span>
         </Link>
 
         <Menu isOpen={openMenu}>

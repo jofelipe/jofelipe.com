@@ -130,6 +130,12 @@ export const Content = styled.div<IContent>`
     margin-bottom: 24px;
   }
 
+  hr {
+    border: 0;
+    border-top: 1px solid ${(props) => props.theme.colors.card};
+    margin: 0 0 32px;
+  }
+
   p {
     font-size: 20px;
     line-height: 32px;
@@ -148,6 +154,22 @@ export const Content = styled.div<IContent>`
       &:hover {
         border-bottom-color: ${(props) => props.theme.colors.primary};
         color: ${(props) => props.theme.colors.primary};
+      }
+    }
+
+    code {
+      background: #2a2c30;
+      color: hsl(220, 14%, 71%);
+      text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+      font: 14px 'Fira Code', 'Fira Mono', Menlo, Consolas, 'DejaVu Sans Mono',
+        monospace;
+      padding: 4px 8px;
+      border-radius: 0.3em;
+
+      &::selection {
+        background: hsl(220, 13%, 28%);
+        color: inherit;
+        text-shadow: none;
       }
     }
   }
@@ -269,6 +291,10 @@ export const Content = styled.div<IContent>`
 
   .text-content {
     margin-bottom: 64px;
+  }
+
+  pre[class*='language-'] {
+    margin-bottom: 32px;
   }
 
   &.project-page img {

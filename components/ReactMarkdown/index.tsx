@@ -1,12 +1,26 @@
 import ReactMarkdown from 'react-markdown/with-html';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+
+import Prism from 'prismjs';
+
+require('prismjs/components/prism-bash');
+
+require('prismjs/components/prism-javascript');
+
+require('prismjs/components/prism-css');
+
+require('prismjs/components/prism-jsx');
 
 interface IMarkdown {
   content: string;
 }
 
 const Markdown: FC<IMarkdown> = ({ content }) => {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+
   function renderParagraph(props) {
     const { children } = props;
 
